@@ -175,7 +175,7 @@ export default function CalendarSection() {
 
               <div className="relative flex items-center">
                 {/* Left accent — day of week */}
-                <div className="flex flex-col items-center justify-center px-5 py-4">
+                <div className="flex flex-col items-center justify-center px-3 md:px-5 py-4">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-sky-500 flex items-center justify-center shadow-sm mb-1.5">
                     <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -188,7 +188,7 @@ export default function CalendarSection() {
                 <div className="w-px self-stretch bg-gradient-to-b from-transparent via-sky-200/50 to-transparent" />
 
                 {/* Center — date numbers */}
-                <div className="flex items-center gap-2 px-5 md:px-7 py-4">
+                <div className="flex items-center gap-1.5 md:gap-2 px-3 md:px-7 py-4">
                   {/* Day */}
                   <div className="text-center">
                     <p className="font-heading text-[9px] font-bold text-sky-400/60 uppercase tracking-wider mb-0.5">Ngày</p>
@@ -244,12 +244,12 @@ export default function CalendarSection() {
                   </div>
                 </div>
 
-                {/* Divider */}
-                <div className="w-px self-stretch bg-gradient-to-b from-transparent via-sky-200/50 to-transparent" />
+                {/* Divider (hidden on small screens with the right accent) */}
+                <div className="hidden md:block w-px self-stretch bg-gradient-to-b from-transparent via-sky-200/50 to-transparent" />
 
-                {/* Right accent — month name */}
-                <div className="flex flex-col items-center justify-center px-5 py-4">
-                  <p className="font-script text-lg md:text-xl text-sky-500 leading-tight">{EVENT.monthNameEn}</p>
+                {/* Right accent — month name (hidden on small screens) */}
+                <div className="hidden md:flex flex-col items-center justify-center px-5 py-4">
+                  <p className="font-script text-xl text-sky-500 leading-tight">{EVENT.monthNameEn}</p>
                   <p className="font-heading text-[9px] font-bold text-sky-400/50 uppercase tracking-wider mt-0.5">{EVENT.year}</p>
                 </div>
               </div>

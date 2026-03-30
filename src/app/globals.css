@@ -150,12 +150,13 @@ body {
   backface-visibility: hidden;
 }
 
-/* ===== Mobile safety: ensure content visible if animations fail ===== */
+/* ===== Reduced motion: keep animations but simplify ===== */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  .sparkle,
+  .colour-sweep,
+  .blob {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }
 

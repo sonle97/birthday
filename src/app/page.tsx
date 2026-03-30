@@ -13,14 +13,16 @@ import RSVPSection from "@/components/RSVPSection";
 import PhotoGallery from "@/components/PhotoGallery";
 import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
+import { MotionConfig } from "framer-motion";
 import { PARENTS } from "@/lib/constants";
 
 export default function Home() {
   return (
+    <MotionConfig reducedMotion="never">
     <main className="min-h-screen bg-bg-primary relative">
       <ParticlesBackground />
       <CloudScene />
-      <MusicPlayer />
+      {/* <MusicPlayer /> */}
 
       <div className="relative z-10">
         <HeroSection />
@@ -55,5 +57,6 @@ export default function Home() {
         <Footer />
       </div>
     </main>
+    </MotionConfig>
   );
 }
