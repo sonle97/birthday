@@ -70,8 +70,8 @@ export default function HeroSection() {
 
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: -30 }}
+            animate={{ y: 0 }}
             transition={{ ...smoothSpring, delay: 0.2 }}
           >
             <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-dark shadow-3d mb-6">
@@ -86,8 +86,8 @@ export default function HeroSection() {
           {/* Subtitle */}
           <motion.p
             className="font-body text-sm md:text-base text-sky-600/60 tracking-[0.2em] uppercase mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            animate={{ y: 0 }}
             transition={{ ...smoothSpring, delay: 0.6 }}
           >
             {EVENT.subtitle}
@@ -96,8 +96,8 @@ export default function HeroSection() {
           {/* Divider */}
           <motion.div
             className="flex items-center gap-3 mb-8"
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
           >
             <div className="h-px w-10 md:w-16 bg-gradient-to-r from-transparent to-sky-400/60" />
@@ -112,8 +112,8 @@ export default function HeroSection() {
           {/* Photo + rings */}
           <motion.div
             className="relative mb-8"
-            initial={{ opacity: 0, scale: 0.4 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 0.4 }}
+            animate={{ scale: 1 }}
             transition={{ ...smoothSpring, delay: 0.8 }}
           >
             {/* CSS rings — no Framer per-frame */}
@@ -169,8 +169,8 @@ export default function HeroSection() {
 
           {/* Baby name */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 40 }}
+            animate={{ y: 0 }}
             transition={{ ...smoothSpring, delay: 1.0 }}
             className="mb-10"
           >
@@ -183,8 +183,8 @@ export default function HeroSection() {
           {/* Save the date card */}
           <motion.div
             className="w-full max-w-sm md:max-w-md"
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 60 }}
+            animate={{ y: 0 }}
             transition={{ ...smoothSpring, delay: 1.2 }}
           >
             <motion.div
@@ -271,8 +271,8 @@ export default function HeroSection() {
           {/* Scroll indicator */}
           <motion.div
             className="mt-16 flex flex-col items-center gap-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ y: 10 }}
+            animate={{ y: 0 }}
             transition={{ delay: 2, duration: 1.2 }}
           >
             <span

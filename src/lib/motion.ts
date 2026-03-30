@@ -27,36 +27,32 @@ export const viewport = { once: true, margin: "0px" } as const;
 
 /* ===== Fade / slide variants ===== */
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { y: 60 },
   visible: (i: number = 0) => ({
-    opacity: 1,
     y: 0,
     transition: { ...smoothSpring, delay: i * 0.12 },
   }),
 };
 
 export const fadeDown: Variants = {
-  hidden: { opacity: 0, y: -40 },
+  hidden: { y: -40 },
   visible: (i: number = 0) => ({
-    opacity: 1,
     y: 0,
     transition: { ...smoothSpring, delay: i * 0.12 },
   }),
 };
 
 export const fadeLeft: Variants = {
-  hidden: { opacity: 0, x: -60 },
+  hidden: { x: -60 },
   visible: (i: number = 0) => ({
-    opacity: 1,
     x: 0,
     transition: { ...smoothSpring, delay: i * 0.12 },
   }),
 };
 
 export const fadeRight: Variants = {
-  hidden: { opacity: 0, x: 60 },
+  hidden: { x: 60 },
   visible: (i: number = 0) => ({
-    opacity: 1,
     x: 0,
     transition: { ...smoothSpring, delay: i * 0.12 },
   }),
@@ -64,18 +60,16 @@ export const fadeRight: Variants = {
 
 /* ===== Scale variants ===== */
 export const scaleUp: Variants = {
-  hidden: { opacity: 0, scale: 0.7 },
+  hidden: { scale: 0.7 },
   visible: (i: number = 0) => ({
-    opacity: 1,
     scale: 1,
     transition: { ...snappySpring, delay: i * 0.12 },
   }),
 };
 
 export const popIn: Variants = {
-  hidden: { opacity: 0, scale: 0.5, rotate: -8 },
+  hidden: { scale: 0.5, rotate: -8 },
   visible: (i: number = 0) => ({
-    opacity: 1,
     scale: 1,
     rotate: 0,
     transition: { ...snappySpring, delay: i * 0.1 },
@@ -84,9 +78,8 @@ export const popIn: Variants = {
 
 /* ===== 3D card lift ===== */
 export const cardLift: Variants = {
-  hidden: { opacity: 0, y: 40, rotateX: 8 },
+  hidden: { y: 40, rotateX: 8 },
   visible: (i: number = 0) => ({
-    opacity: 1,
     y: 0,
     rotateX: 0,
     transition: { ...smoothSpring, delay: i * 0.15 },
@@ -102,9 +95,8 @@ export const staggerContainer: Variants = {
 };
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { y: 30 },
   visible: {
-    opacity: 1,
     y: 0,
     transition: smoothSpring,
   },

@@ -165,8 +165,8 @@ export default function InvitationSection() {
           {/* Bottom ornament */}
           <motion.div
             className="mt-6 flex items-center justify-center gap-3"
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
             viewport={viewport}
             transition={{ ...smoothSpring, delay: 0.6 }}
           >

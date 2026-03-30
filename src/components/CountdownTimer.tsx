@@ -33,9 +33,9 @@ function Digit({ value }: { value: number }) {
         <motion.span
           key={display}
           className="font-heading text-3xl md:text-4xl font-bold text-gradient-sky"
-          initial={{ y: 30, opacity: 0, rotateX: -45 }}
-          animate={{ y: 0, opacity: 1, rotateX: 0 }}
-          exit={{ y: -30, opacity: 0, rotateX: 45 }}
+          initial={{ y: 30, rotateX: -45 }}
+          animate={{ y: 0, rotateX: 0 }}
+          exit={{ y: -30, rotateX: 45 }}
           transition={snappySpring}
         >
           {display}

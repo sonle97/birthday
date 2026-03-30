@@ -140,9 +140,9 @@ export default function RSVPSection() {
                   {attending === "yes" && (
                     <motion.div
                       className="mb-6"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
+                      initial={{ height: 0 }}
+                      animate={{ height: "auto" }}
+                      exit={{ height: 0 }}
                       transition={smoothSpring}
                     >
                       <label className="block font-body text-text-primary text-sm font-medium mb-2">
@@ -217,8 +217,8 @@ export default function RSVPSection() {
             <motion.div
               key="success"
               className="glass-strong rounded-3xl shadow-3d-lg p-8"
-              initial={{ opacity: 0, scale: 0.7, rotateX: -20 }}
-              animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+              initial={{ scale: 0.7, rotateX: -20 }}
+              animate={{ scale: 1, rotateX: 0 }}
               transition={smoothSpring}
               style={{ perspective: 800 }}
             >

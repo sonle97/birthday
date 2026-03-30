@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+
 
 /* ── Balloon colour palette (matches theme tokens) ── */
 const PALETTE = [
@@ -223,12 +223,10 @@ export default function ParticlesBackground() {
   }, []);
 
   return (
-    <motion.canvas
+    <canvas
       ref={canvasRef}
       className="fixed inset-0 z-0 pointer-events-none"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 0.55 }}
-      transition={{ duration: 2 }}
+      style={{ opacity: 0.55 }}
     />
   );
 }
