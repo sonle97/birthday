@@ -1,26 +1,347 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sky-50: #f0f9ff;
+  --color-sky-100: #e0f2fe;
+  --color-sky-200: #bae6fd;
+  --color-sky-300: #7dd3fc;
+  --color-sky-400: #38bdf8;
+  --color-sky-500: #0ea5e9;
+  --color-sky-600: #0284c7;
+  --color-sky-700: #0369a1;
+  --color-sky-800: #075985;
+  --color-sky-900: #0c4a6e;
+
+  --color-gold: #f0c456;
+  --color-gold-light: #fde68a;
+  --color-gold-dark: #d4a20a;
+  --color-rose: #fb7185;
+  --color-rose-light: #fecdd3;
+  --color-violet: #8b5cf6;
+  --color-violet-light: #c4b5fd;
+
+  --color-bg-primary: #f0f9ff;
+  --color-bg-secondary: #e0f2fe;
+  --color-text-primary: #0c4a6e;
+  --color-text-secondary: #0369a1;
+
+  --font-heading: "Space Grotesk", "Inter", sans-serif;
+  --font-script: "Dancing Script", cursive;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #f0f9ff;
+  --foreground: #0c4a6e;
 }
+
+* { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #e0f2fe; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #38bdf8, #0ea5e9); border-radius: 3px; }
+
+/* ===== Glass morphism ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.glass-strong {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.glass-sky {
+  background: rgba(224, 242, 254, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(186, 230, 253, 0.5);
+}
+.glass-dark {
+  background: rgba(7, 89, 133, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(14, 165, 233, 0.12);
+}
+
+/* ===== Text gradients ===== */
+.text-gradient-sky {
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8, #7dd3fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-hero {
+  background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 40%, #38bdf8 60%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-gold {
+  background: linear-gradient(135deg, #f0c456, #d4a20a, #fde68a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-warm {
+  background: linear-gradient(135deg, #f0c456 0%, #fb923c 50%, #fb7185 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Shadows ===== */
+.shadow-3d {
+  box-shadow: 0 2px 4px rgba(14,165,233,0.1), 0 8px 16px rgba(14,165,233,0.1), 0 16px 32px rgba(14,165,233,0.05);
+}
+.shadow-3d-lg {
+  box-shadow: 0 4px 8px rgba(14,165,233,0.1), 0 12px 24px rgba(14,165,233,0.15), 0 24px 48px rgba(14,165,233,0.1);
+}
+.shadow-3d-xl {
+  box-shadow:
+    0 4px 6px rgba(14,165,233,0.07),
+    0 10px 15px rgba(14,165,233,0.1),
+    0 20px 25px rgba(14,165,233,0.1),
+    0 40px 50px rgba(14,165,233,0.07),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.shadow-glow-sky {
+  box-shadow: 0 0 30px rgba(56,189,248,0.3), 0 0 60px rgba(56,189,248,0.1);
+}
+.shadow-glow-gold {
+  box-shadow: 0 0 30px rgba(240,196,86,0.3), 0 0 60px rgba(240,196,86,0.1);
+}
+.shadow-glow-white {
+  box-shadow: 0 0 40px rgba(255,255,255,0.5), 0 0 80px rgba(255,255,255,0.2);
+}
+
+/* ===== Calendar highlight ===== */
+.calendar-highlight {
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(14,165,233,0.4);
+}
+
+/* ===== Hero mesh gradient ===== */
+.hero-mesh {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56,189,248,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 20% 60%, rgba(240,196,86,0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #e0f2fe 0%, #f0f9ff 30%, #ffffff 100%);
+}
+
+/* ===== GPU-promoted layers ===== */
+.gpu-layer {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ===== CSS-only sparkle ===== */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.8; transform: scale(1.3); }
+}
+.sparkle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #38bdf8, #fff);
+  animation: sparkle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: opacity, transform;
+}
+
+/* ===== CSS-only shimmer sweep ===== */
+@keyframes shimmerSweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.shimmer-sweep {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.shimmer-sweep::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 50%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
+  animation: shimmerSweep 4s ease-in-out infinite;
+  animation-delay: 2s;
+  will-change: transform;
+}
+
+/* ===== CSS-only colour sweep ===== */
+@keyframes colourSweep {
+  0%   { opacity: 0.12; transform: translate(0, 0); }
+  33%  { opacity: 0.08; transform: translate(30%, 40%); }
+  66%  { opacity: 0.07; transform: translate(-10%, 20%); }
+  100% { opacity: 0.12; transform: translate(0, 0); }
+}
+.colour-sweep {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(56,189,248,0.35) 0%, transparent 70%);
+  animation: colourSweep 16s ease-in-out infinite;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* ===== CSS-only morph blob ===== */
+@keyframes morphBlob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%      { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%      { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+  75%      { border-radius: 60% 40% 60% 30% / 60% 40% 30% 70%; }
+}
+.blob {
+  animation: morphBlob var(--dur, 14s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: border-radius;
+}
+
+/* ===== CSS-only orbit spin ===== */
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.orbit {
+  animation: orbitSpin var(--dur, 12s) linear infinite;
+  will-change: transform;
+}
+.orbit-reverse {
+  animation: orbitSpin var(--dur, 18s) linear infinite reverse;
+  will-change: transform;
+}
+
+/* ===== CSS-only ring spin ===== */
+@keyframes ringSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.ring-spin {
+  animation: ringSpin var(--dur, 25s) linear infinite;
+  will-change: transform;
+}
+.ring-spin-reverse {
+  animation: ringSpin var(--dur, 35s) linear infinite reverse;
+  will-change: transform;
+}
+
+/* ===== Save the Date animated gradient border ===== */
+@keyframes borderRotate {
+  0%   { --border-angle: 0deg; }
+  100% { --border-angle: 360deg; }
+}
+.save-date-border {
+  background: conic-gradient(
+    from var(--border-angle, 0deg),
+    rgba(56,189,248,0.5),
+    rgba(255,255,255,0.6),
+    rgba(139,92,246,0.3),
+    rgba(240,196,86,0.3),
+    rgba(56,189,248,0.5)
+  );
+  animation: borderRotate 6s linear infinite;
+  will-change: auto;
+}
+@supports (background: conic-gradient(from 0deg, red, blue)) {
+  @property --border-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+}
+
+/* ============================================================
+   CLOUD SCENE — clouds, airplane, flying kids
+   ============================================================ */
+
+/* ── Cloud drift (left → right) ── */
+@keyframes cloudDrift {
+  from { transform: translateX(var(--startX, -200px)); }
+  to   { transform: translateX(var(--endX, 110vw)); }
+}
+.cloud {
+  animation: cloudDrift var(--speed, 40s) linear infinite;
+  will-change: transform;
+  filter: drop-shadow(0 2px 8px rgba(186,230,253,0.3));
+}
+
+/* ── Airplane fly across ── */
+@keyframes airplaneFly {
+  from { transform: translateX(var(--startX, -140px)); }
+  to   { transform: translateX(var(--endX, 110vw)); }
+}
+@keyframes airplaneBob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-8px) rotate(1deg); }
+}
+.airplane {
+  animation: airplaneFly var(--speed, 18s) linear infinite;
+  will-change: transform;
+}
+.airplane-bob {
+  animation: airplaneBob 2.5s ease-in-out infinite;
+}
+/* Propeller spin */
+.airplane-propeller {
+  transform-origin: 85px 28px;
+  animation: orbitSpin 0.15s linear infinite;
+}
+/* Exhaust puffs */
+@keyframes exhaustPuff {
+  0%   { opacity: 0.5; transform: scale(1) translateX(0); }
+  100% { opacity: 0; transform: scale(2.5) translateX(-12px); }
+}
+.exhaust-puff {
+  animation: exhaustPuff 0.8s ease-out infinite;
+  will-change: transform, opacity;
+}
+
+/* ── Flying kids (right → left, with bob) ── */
+@keyframes kidFly {
+  from { transform: translateX(var(--startX, 110vw)); }
+  to   { transform: translateX(var(--endX, -80px)); }
+}
+@keyframes kidBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(calc(-1 * var(--bobAmt, 12px))); }
+}
+.flying-kid {
+  animation: kidFly var(--speed, 22s) linear infinite;
+  will-change: transform;
+}
+.flying-kid-bob {
+  animation: kidBob 3s ease-in-out infinite;
+}
+
+/* ── Bamboo copter spin ── */
+@keyframes copterSpin {
+  from { transform: rotate(0deg) scaleY(1); }
+  25%  { transform: rotate(90deg) scaleY(0.3); }
+  50%  { transform: rotate(180deg) scaleY(1); }
+  75%  { transform: rotate(270deg) scaleY(0.3); }
+  to   { transform: rotate(360deg) scaleY(1); }
+}
+.copter-spin {
+  transform-origin: 30px 6px;
+  animation: copterSpin 0.4s linear infinite;
+  will-change: transform;
 }
