@@ -22,9 +22,8 @@ const sparkles = [
 
 export default function HeroSection() {
   const scrollY = usePageScroll();
-  /* All parallax via useTransform — pure MotionValues, zero React re-renders */
+  /* Parallax only — no opacity fade so content stays visible on scroll */
   const contentY = useTransform(scrollY, [0, 600], [0, 120]);
-  const contentOpacity = useTransform(scrollY, [0, 350], [1, 0]);
 
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
@@ -65,7 +64,7 @@ export default function HeroSection() {
       {/* ====== CONTENT (Framer only for entrance + scroll parallax) ====== */}
       <motion.div
         className="relative z-10 w-full max-w-3xl mx-auto px-6 py-20 gpu-layer"
-        style={{ y: contentY, opacity: contentOpacity }}
+        style={{ y: contentY }}
       >
         <div className="flex flex-col items-center text-center">
 
