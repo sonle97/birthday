@@ -97,7 +97,7 @@ export default function PhotoGallery() {
               variants={cardVariant}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-30px" }}
+              viewport={viewport}
               custom={index}
               style={{ perspective: 800 }}
             >

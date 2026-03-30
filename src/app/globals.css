@@ -150,6 +150,15 @@ body {
   backface-visibility: hidden;
 }
 
+/* ===== Mobile safety: ensure content visible if animations fail ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ===== CSS-only sparkle ===== */
 @keyframes sparkle {
   0%, 100% { opacity: 0; transform: scale(0.5); }

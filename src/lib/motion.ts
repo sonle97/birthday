@@ -23,7 +23,7 @@ export const gentleSpring: Transition = {
 };
 
 /* ===== Reusable viewport config ===== */
-export const viewport = { once: true, margin: "-60px" } as const;
+export const viewport = { once: true, margin: "0px" } as const;
 
 /* ===== Fade / slide variants ===== */
 export const fadeUp: Variants = {
