@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { fadeUp, staggerContainer, staggerItem, viewport } from "@/lib/motion";
 import { EVENT } from "@/lib/constants";
 
 const DAYS_OF_WEEK = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
@@ -21,13 +17,7 @@ export default function CalendarSection() {
 
       <div className="max-w-md mx-auto text-center relative z-10">
         {/* Header */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={0}
-        >
+        <div>
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
             <svg className="w-4 h-4 text-sky-400/50" viewBox="0 0 24 24" fill="currentColor">
@@ -41,22 +31,11 @@ export default function CalendarSection() {
           <p className="font-heading text-[10px] font-bold text-sky-400/50 uppercase tracking-[0.4em]">
             Mark Your Calendar
           </p>
-        </motion.div>
+        </div>
 
         {/* Calendar card */}
-        <motion.div
-          className="mt-10"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={1}
-        >
-          <motion.div
-            className="relative rounded-[32px] p-[1.5px] save-date-border overflow-hidden"
-            whileHover={{ scale: 1.02, y: -3 }}
-            transition={{ type: "spring", stiffness: 180 }}
-          >
+        <div className="mt-10">
+          <div className="relative rounded-[32px] p-[1.5px] save-date-border overflow-hidden">
             <div className="relative rounded-[31px] bg-white/90 backdrop-blur-2xl overflow-hidden">
               <div className="shimmer-sweep" />
 
@@ -100,30 +79,18 @@ export default function CalendarSection() {
                 </div>
 
                 {/* Day grid */}
-                <motion.div
-                  className="grid grid-cols-7 gap-0.5"
-                  variants={staggerContainer}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={viewport}
-                >
+                <div className="grid grid-cols-7 gap-0.5">
                   {blanks.map((i) => (
                     <div key={`b-${i}`} className="py-2.5" />
                   ))}
                   {days.map((day) => (
-                    <motion.div
+                    <div
                       key={day}
-                      variants={staggerItem}
                       className={`relative py-2 font-body text-sm rounded-xl cursor-default transition-colors duration-200 ${
                         day === HIGHLIGHT_DAY
                           ? "text-white font-bold text-base z-10"
                           : "text-text-primary/60 hover:bg-sky-50 hover:text-sky-600"
                       }`}
-                      whileHover={
-                        day !== HIGHLIGHT_DAY
-                          ? { scale: 1.15 }
-                          : {}
-                      }
                     >
                       {day === HIGHLIGHT_DAY ? (
                         <>
@@ -137,39 +104,22 @@ export default function CalendarSection() {
                           />
                           {/* Shine */}
                           <div className="absolute top-0.5 left-0.5 right-0.5 h-1/2 bg-gradient-to-b from-white/20 to-transparent rounded-t-xl" />
-                          {/* Ping */}
-                          <motion.div
-                            className="absolute inset-0 rounded-xl bg-sky-400/20"
-                            animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
-                            transition={{ duration: 1.8, repeat: Infinity }}
-                          />
                           <span className="relative z-10 font-heading font-extrabold">{day}</span>
                         </>
                       ) : (
                         day
                       )}
-                    </motion.div>
+                    </div>
                   ))}
-                </motion.div>
+                </div>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Date display card */}
-        <motion.div
-          className="mt-10"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={2}
-        >
-          <motion.div
-            className="relative rounded-[24px] p-[1.5px] save-date-border overflow-hidden inline-block"
-            whileHover={{ scale: 1.03, y: -3 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
+        <div className="mt-10">
+          <div className="relative rounded-[24px] p-[1.5px] save-date-border overflow-hidden inline-block">
             <div className="relative rounded-[23px] bg-white/90 backdrop-blur-2xl overflow-hidden">
               <div className="shimmer-sweep" />
 
@@ -254,8 +204,8 @@ export default function CalendarSection() {
                 </div>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

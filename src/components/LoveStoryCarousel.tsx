@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Autoplay, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
-import { fadeUp, viewport } from "@/lib/motion";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -122,14 +120,7 @@ export default function LoveStoryCarousel() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.03]" style={{ background: "radial-gradient(circle, #0ea5e9, transparent 70%)" }} />
 
       {/* Header */}
-      <motion.div
-        className="text-center mb-12 md:mb-16 max-w-lg mx-auto"
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewport}
-        custom={0}
-      >
+      <div className="text-center mb-12 md:mb-16 max-w-lg mx-auto">
         <div className="inline-flex items-center gap-2 mb-3">
           <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
           <svg className="w-4 h-4 text-rose/40" viewBox="0 0 24 24" fill="currentColor">
@@ -148,16 +139,12 @@ export default function LoveStoryCarousel() {
         <div className="flex items-center justify-center gap-1 mt-6">
           {STORY_ITEMS.map((item, i) => (
             <div key={item.id} className="flex items-center">
-              <motion.div
+              <div
                 className="w-2 h-2 rounded-full transition-all duration-300"
                 style={{
                   backgroundColor: i === activeIndex ? activeItem.accent : "rgba(186,230,253,0.4)",
-                  scale: i === activeIndex ? 1.4 : 1,
+                  transform: i === activeIndex ? "scale(1.4)" : "scale(1)",
                 }}
-                animate={{
-                  scale: i === activeIndex ? [1.4, 1.7, 1.4] : 1,
-                }}
-                transition={{ duration: 2, repeat: i === activeIndex ? Infinity : 0, type: "tween", ease: "easeInOut" }}
               />
               {i < STORY_ITEMS.length - 1 && (
                 <div
@@ -171,50 +158,28 @@ export default function LoveStoryCarousel() {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Active slide info */}
-      <motion.div
-        className="text-center mb-8"
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewport}
-        custom={1}
-      >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIndex}
-            initial={{ y: 15 }}
-            animate={{ y: 0 }}
-            exit={{ y: -15 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col items-center"
+      <div className="text-center mb-8">
+        <div className="flex flex-col items-center">
+          <span
+            className="inline-block px-3 py-1 rounded-full text-white font-heading text-[10px] font-bold uppercase tracking-widest mb-2"
+            style={{ backgroundColor: activeItem.accent }}
           >
-            <span
-              className="inline-block px-3 py-1 rounded-full text-white font-heading text-[10px] font-bold uppercase tracking-widest mb-2"
-              style={{ backgroundColor: activeItem.accent }}
-            >
-              {activeIndex + 1} / {STORY_ITEMS.length}
-            </span>
-            <h4 className="font-heading text-xl md:text-2xl font-extrabold text-text-primary">
-              {activeItem.title}
-            </h4>
-            <p className="font-body text-sm text-sky-500/70 mt-1">
-              {activeItem.subtitle}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-      </motion.div>
+            {activeIndex + 1} / {STORY_ITEMS.length}
+          </span>
+          <h4 className="font-heading text-xl md:text-2xl font-extrabold text-text-primary">
+            {activeItem.title}
+          </h4>
+          <p className="font-body text-sm text-sky-500/70 mt-1">
+            {activeItem.subtitle}
+          </p>
+        </div>
+      </div>
 
       {/* Swiper Coverflow */}
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewport}
-        custom={2}
-      >
+      <div>
         <Swiper
           modules={[EffectCoverflow, Autoplay, Pagination]}
           effect="coverflow"
@@ -259,13 +224,12 @@ export default function LoveStoryCarousel() {
 
                     {/* Icon */}
                     <div className="text-center relative z-10">
-                      <motion.div
+                      <div
                         className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-2 opacity-25 group-hover:opacity-40 transition-opacity"
                         style={{ color: item.accent }}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
                       >
                         {Icons[item.icon]}
-                      </motion.div>
+                      </div>
                       <div className="px-3 py-1 rounded-full bg-white/50 backdrop-blur-sm border border-white/40 inline-block">
                         <p className="font-body text-[10px] font-medium tracking-wide" style={{ color: item.accent }}>
                           Thêm ảnh
@@ -299,7 +263,7 @@ export default function LoveStoryCarousel() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </motion.div>
+      </div>
 
       {/* Swiper custom pagination styles */}
       <style jsx global>{`

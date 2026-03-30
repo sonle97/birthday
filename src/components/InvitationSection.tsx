@@ -1,8 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { motion } from "framer-motion";
-import { fadeUp, scaleUp, viewport, smoothSpring } from "@/lib/motion";
 import { BABY } from "@/lib/constants";
 import ConfettiCannon from "@/components/ConfettiCannon";
 
@@ -30,13 +28,7 @@ export default function InvitationSection() {
       <div className="max-w-2xl mx-auto text-center relative z-10">
 
         {/* ── Heading ── */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={0}
-        >
+        <div>
           {/* Small top label */}
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
@@ -52,17 +44,10 @@ export default function InvitationSection() {
           <p className="font-heading text-[10px] font-bold text-sky-400/50 uppercase tracking-[0.4em]">
             Cordially Invited
           </p>
-        </motion.div>
+        </div>
 
         {/* ── Decorative divider ── */}
-        <motion.div
-          className="flex items-center justify-center gap-3 my-7"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={1}
-        >
+        <div className="flex items-center justify-center gap-3 my-7">
           <div className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent to-sky-300/50" />
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-sky-400/40" />
@@ -72,36 +57,18 @@ export default function InvitationSection() {
             <div className="w-1.5 h-1.5 rounded-full bg-gold/40" />
           </div>
           <div className="h-px w-12 md:w-20 bg-gradient-to-l from-transparent to-sky-300/50" />
-        </motion.div>
+        </div>
 
         {/* ── Message ── */}
-        <motion.p
-          className="font-body text-base md:text-lg text-text-primary/70 leading-relaxed max-w-md mx-auto"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={2}
-        >
+        <p className="font-body text-base md:text-lg text-text-primary/70 leading-relaxed max-w-md mx-auto">
           Cùng chung vui với gia đình chúng tôi
           <br />
           trong buổi tiệc mừng
-        </motion.p>
+        </p>
 
         {/* ── Name card — hero element ── */}
-        <motion.div
-          className="my-8"
-          variants={scaleUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={3}
-        >
-          <motion.div
-            className="inline-block relative"
-            whileHover={{ scale: 1.04, y: -4 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
+        <div className="my-8">
+          <div className="inline-block relative">
             {/* Animated gradient border */}
             <div className="relative rounded-[24px] p-[1.5px] save-date-border overflow-hidden">
               <div className="relative rounded-[23px] bg-white/90 backdrop-blur-xl px-10 md:px-14 py-6 md:py-8 overflow-hidden">
@@ -147,36 +114,24 @@ export default function InvitationSection() {
                 <path d="M12 2L13.5 8.5L20 7L14.5 11L18 17L12 13.5L6 17L9.5 11L4 7L10.5 8.5L12 2Z" />
               </svg>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* ── Closing line ── */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={4}
-        >
+        <div>
           <p className="font-body text-sm md:text-base text-text-primary/50 italic leading-relaxed max-w-sm mx-auto">
             Sự hiện diện của Quý khách là niềm vinh hạnh lớn lao cho gia đình chúng tôi
           </p>
 
           {/* Bottom ornament */}
-          <motion.div
-            className="mt-6 flex items-center justify-center gap-3"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={viewport}
-            transition={{ ...smoothSpring, delay: 0.6 }}
-          >
+          <div className="mt-6 flex items-center justify-center gap-3">
             <div className="h-px w-10 bg-gradient-to-r from-transparent to-sky-200/40" />
             <svg className="w-4 h-4 text-sky-300/30" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm1-8h4v2h-6V7h2v5z" />
             </svg>
             <div className="h-px w-10 bg-gradient-to-l from-transparent to-sky-200/40" />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * Happy Birthday melody — synthesized via Web Audio API.
@@ -136,76 +135,70 @@ export default function MusicPlayer() {
   };
 
   return (
-    <motion.button
-      onClick={toggle}
-      className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl flex items-center justify-center ${
-        isPlaying
-          ? "bg-gradient-to-br from-sky-400 to-sky-600 shadow-glow-sky"
-          : "glass-strong shadow-3d"
-      }`}
-      initial={{ scale: 0, rotate: -45 }}
-      animate={{ scale: 1, rotate: isPlaying ? 0 : 3 }}
-      whileHover={{ scale: 1.15, rotate: 0 }}
-      whileTap={{ scale: 0.9 }}
-      transition={{ type: "spring", stiffness: 200, damping: 12 }}
-      aria-label={isPlaying ? "Tắt nhạc" : "Bật nhạc"}
-    >
-      {/* Pulse rings */}
-      <AnimatePresence>
+    <>
+      <style>{`
+        @keyframes music-pulse {
+          0% { transform: scale(1); opacity: 0.5; }
+          100% { transform: scale(1.6); opacity: 0; }
+        }
+        @keyframes sound-bar {
+          0%, 100% { height: 3px; }
+          50% { height: var(--bar-max); }
+        }
+      `}</style>
+      <button
+        onClick={toggle}
+        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl flex items-center justify-center ${
+          isPlaying
+            ? "bg-gradient-to-br from-sky-400 to-sky-600 shadow-glow-sky"
+            : "glass-strong shadow-3d"
+        }`}
+        aria-label={isPlaying ? "Tắt nhạc" : "Bật nhạc"}
+      >
+        {/* Pulse ring */}
         {isPlaying && (
-          <motion.div
+          <div
             className="absolute inset-0 rounded-2xl bg-sky-400/20"
-            initial={{ scale: 1, opacity: 0.5 }}
-            animate={{ scale: 1.6, opacity: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, repeat: Infinity, type: "tween" }}
+            style={{
+              animation: "music-pulse 1.2s ease-out infinite",
+            }}
           />
         )}
-      </AnimatePresence>
 
-      <div className="relative">
-        <svg
-          className={`w-6 h-6 ${isPlaying ? "text-white" : "text-sky-500"}`}
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-          {!isPlaying && (
-            <line
-              x1="4" y1="4" x2="20" y2="20"
-              stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-            />
-          )}
-        </svg>
+        <div className="relative">
+          <svg
+            className={`w-6 h-6 ${isPlaying ? "text-white" : "text-sky-500"}`}
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+            {!isPlaying && (
+              <line
+                x1="4" y1="4" x2="20" y2="20"
+                stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+              />
+            )}
+          </svg>
 
-        {/* Sound wave bars */}
-        <AnimatePresence>
+          {/* Sound wave bars */}
           {isPlaying && (
-            <motion.div
-              className="absolute -top-1.5 -right-1.5 flex gap-[2px]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
+            <div className="absolute -top-1.5 -right-1.5 flex gap-[2px] items-end">
               {[0, 1, 2].map((i) => (
-                <motion.div
+                <div
                   key={i}
                   className="w-[3px] bg-white rounded-full"
-                  animate={{ height: [3, 8 + i * 2, 3] }}
-                  transition={{
-                    duration: 0.5,
-                    repeat: Infinity,
-                    delay: i * 0.12,
-                    ease: "easeInOut",
-                    type: "tween",
-                  }}
-                  style={{ height: 3 }}
+                  style={{
+                    height: 3,
+                    "--bar-max": `${8 + i * 2}px`,
+                    animation: `sound-bar 0.5s ease-in-out infinite`,
+                    animationDelay: `${i * 0.12}s`,
+                  } as React.CSSProperties}
                 />
               ))}
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
-      </div>
-    </motion.button>
+        </div>
+      </button>
+    </>
   );
 }

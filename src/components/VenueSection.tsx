@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { fadeUp, viewport, smoothSpring } from "@/lib/motion";
 import { VENUE } from "@/lib/constants";
 
 export default function VenueSection() {
@@ -14,14 +10,7 @@ export default function VenueSection() {
 
       <div className="max-w-lg mx-auto relative z-10">
         {/* Header */}
-        <motion.div
-          className="text-center mb-10"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={0}
-        >
+        <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
             <svg className="w-4 h-4 text-sky-400/50" viewBox="0 0 24 24" fill="currentColor">
@@ -35,21 +24,11 @@ export default function VenueSection() {
           <p className="font-heading text-[10px] font-bold text-sky-400/50 uppercase tracking-[0.4em]">
             Event Venue
           </p>
-        </motion.div>
+        </div>
 
         {/* Main card */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={1}
-        >
-          <motion.div
-            className="relative rounded-[32px] p-[1.5px] save-date-border overflow-hidden"
-            whileHover={{ scale: 1.02, y: -4 }}
-            transition={{ type: "spring", stiffness: 180 }}
-          >
+        <div>
+          <div className="relative rounded-[32px] p-[1.5px] save-date-border overflow-hidden">
             <div className="relative rounded-[31px] bg-white/90 backdrop-blur-2xl overflow-hidden">
               {/* Shimmer */}
               <div className="shimmer-sweep" />
@@ -82,16 +61,12 @@ export default function VenueSection() {
                 </svg>
                 {/* Icon centered */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center"
-                    whileHover={{ rotate: -6, scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 200 }}
-                  >
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center">
                     <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
 
@@ -107,11 +82,7 @@ export default function VenueSection() {
 
                 {/* Info rows */}
                 <div className="space-y-2.5 mb-7">
-                  <motion.div
-                    className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-sky-50/60 border border-sky-100/50 group"
-                    whileHover={{ x: 4, backgroundColor: "rgba(224,242,254,0.7)" }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
+                  <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-sky-50/60 border border-sky-100/50 group">
                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-sky-500 flex items-center justify-center flex-shrink-0 shadow-sm">
                       <svg className="w-4.5 h-4.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -121,13 +92,9 @@ export default function VenueSection() {
                       <p className="font-heading text-[10px] text-sky-400 uppercase tracking-wider font-semibold">Phòng tiệc</p>
                       <p className="font-body text-sm md:text-base text-text-primary font-medium">{VENUE.floor} — {VENUE.room}</p>
                     </div>
-                  </motion.div>
+                  </div>
 
-                  <motion.div
-                    className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-sky-50/60 border border-sky-100/50 group"
-                    whileHover={{ x: 4, backgroundColor: "rgba(224,242,254,0.7)" }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
+                  <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-sky-50/60 border border-sky-100/50 group">
                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-sky-500 flex items-center justify-center flex-shrink-0 shadow-sm">
                       <svg className="w-4.5 h-4.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -138,11 +105,11 @@ export default function VenueSection() {
                       <p className="font-heading text-[10px] text-sky-400 uppercase tracking-wider font-semibold">Địa chỉ</p>
                       <p className="font-body text-sm md:text-base text-text-primary font-medium">{VENUE.address}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Map button */}
-                <motion.a
+                <a
                   href={VENUE.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -151,9 +118,6 @@ export default function VenueSection() {
                     background: "linear-gradient(135deg, #0284c7, #0ea5e9, #38bdf8)",
                     boxShadow: "0 8px 25px rgba(14,165,233,0.35), inset 0 1px 0 rgba(255,255,255,0.2)",
                   }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ ...smoothSpring }}
                 >
                   {/* Button shimmer */}
                   <div className="shimmer-sweep" />
@@ -166,11 +130,11 @@ export default function VenueSection() {
                   <svg className="w-4 h-4 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
-                </motion.a>
+                </a>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

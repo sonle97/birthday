@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { fadeUp, viewport } from "@/lib/motion";
 import { BABY, EVENT } from "@/lib/constants";
 
 export default function Footer() {
@@ -39,47 +35,25 @@ export default function Footer() {
         <div className="max-w-md mx-auto relative z-10">
 
           {/* ── Thank you ── */}
-          <motion.div
-            className="text-center mb-8"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-            custom={0}
-          >
-            <motion.div
-              className="inline-block mb-4"
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
+          <div className="text-center mb-8">
+            <div className="inline-block mb-4">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose/80 to-rose flex items-center justify-center shadow-lg" style={{ boxShadow: "0 6px 20px rgba(251,113,133,0.3)" }}>
                 <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                 </svg>
               </div>
-            </motion.div>
+            </div>
             <p className="font-script text-3xl md:text-4xl text-sky-700/80 mb-3 leading-tight">
               Trân trọng cảm ơn
             </p>
             <p className="font-body text-sm md:text-base text-sky-600/50 leading-relaxed max-w-xs mx-auto">
               Sự hiện diện của Quý khách là món quà quý giá nhất trong ngày đặc biệt này
             </p>
-          </motion.div>
+          </div>
 
           {/* ── Family signature card ── */}
-          <motion.div
-            className="mb-10"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-            custom={1}
-          >
-            <motion.div
-              className="relative mx-auto max-w-md rounded-[32px] p-[1.5px] save-date-border overflow-hidden"
-              whileHover={{ scale: 1.02, y: -4 }}
-              transition={{ type: "spring", stiffness: 180 }}
-            >
+          <div className="mb-10">
+            <div className="relative mx-auto max-w-md rounded-[32px] p-[1.5px] save-date-border overflow-hidden">
               <div className="relative rounded-[31px] bg-white/95 backdrop-blur-2xl overflow-hidden">
                 <div className="shimmer-sweep" />
 
@@ -98,11 +72,7 @@ export default function Footer() {
 
                 {/* Floating icon — overlaps header and content */}
                 <div className="relative -mt-10 flex justify-center mb-3">
-                  <motion.div
-                    className="relative"
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
+                  <div className="relative">
                     {/* Glow */}
                     <div className="absolute inset-[-4px] rounded-2xl bg-sky-400/15 blur-md" />
                     <div
@@ -117,7 +87,7 @@ export default function Footer() {
                         <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
                       </svg>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Text content */}
@@ -142,18 +112,11 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* ── Credits ── */}
-          <motion.div
-            className="text-center"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-            custom={2}
-          >
+          <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-sky-400/20" />
               <div className="w-1 h-1 rounded-full bg-sky-400/30" />
@@ -161,20 +124,16 @@ export default function Footer() {
             </div>
             <p className="font-body text-sky-600/40 text-xs">
               Designed with{" "}
-              <motion.span
-                className="text-rose/60 inline-block"
-                animate={{ scale: [1, 1.25, 1] }}
-                transition={{ duration: 1.2, repeat: Infinity, type: "tween", ease: "easeInOut" }}
-              >
+              <span className="text-rose/60 inline-block">
                 &#10084;
-              </motion.span>{" "}
+              </span>{" "}
               by{" "}
               <span className="font-semibold text-sky-500/50">Thiệp Online</span>
             </p>
             <p className="font-body text-sky-400/30 text-[10px] mt-1">
               &copy; {EVENT.year} — Thiệp mời thôi nôi bé {BABY.name}
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </footer>

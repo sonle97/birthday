@@ -1,11 +1,4 @@
-"use client";
-
-import { motion, useTransform } from "framer-motion";
-import { usePageScroll } from "@/hooks/useScrollAnimation";
-import { smoothSpring } from "@/lib/motion";
 import { BABY, EVENT } from "@/lib/constants";
-
-/* ---------- static decorative data (no Math.random!) ---------- */
 
 const sparkles = [
   { top: "12%", left: "8%",  size: 2.0, delay: "0s",   dur: "2.8s" },
@@ -21,10 +14,6 @@ const sparkles = [
 ];
 
 export default function HeroSection() {
-  const scrollY = usePageScroll();
-  /* Parallax only — no opacity fade so content stays visible on scroll */
-  const contentY = useTransform(scrollY, [0, 600], [0, 120]);
-
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
 
@@ -61,19 +50,12 @@ export default function HeroSection() {
         backgroundSize: "80px 80px",
       }} />
 
-      {/* ====== CONTENT (Framer only for entrance + scroll parallax) ====== */}
-      <motion.div
-        className="relative z-10 w-full max-w-3xl mx-auto px-6 py-20 gpu-layer"
-        style={{ y: contentY }}
-      >
+      {/* ====== CONTENT ====== */}
+      <div className="relative z-10 w-full max-w-3xl mx-auto px-6 py-20 gpu-layer">
         <div className="flex flex-col items-center text-center">
 
           {/* Badge */}
-          <motion.div
-            initial={{ y: -30 }}
-            animate={{ y: 0 }}
-            transition={{ ...smoothSpring, delay: 0.2 }}
-          >
+          <div>
             <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-dark shadow-3d mb-6">
               <span className="sparkle-dot w-1.5 h-1.5 rounded-full bg-sky-400" style={{ animation: "sparkle 2s ease-in-out infinite" }} />
               <span className="font-heading text-[11px] font-semibold text-sky-700 tracking-[0.25em] uppercase">
@@ -81,25 +63,15 @@ export default function HeroSection() {
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-sky-400" style={{ animation: "sparkle 2s ease-in-out infinite 0.6s" }} />
             </div>
-          </motion.div>
+          </div>
 
           {/* Subtitle */}
-          <motion.p
-            className="font-body text-sm md:text-base text-sky-600/60 tracking-[0.2em] uppercase mb-6"
-            initial={{ y: 20 }}
-            animate={{ y: 0 }}
-            transition={{ ...smoothSpring, delay: 0.6 }}
-          >
+          <p className="font-body text-sm md:text-base text-sky-600/60 tracking-[0.2em] uppercase mb-6">
             {EVENT.subtitle}
-          </motion.p>
+          </p>
 
           {/* Divider */}
-          <motion.div
-            className="flex items-center gap-3 mb-8"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-          >
+          <div className="flex items-center gap-3 mb-8">
             <div className="h-px w-10 md:w-16 bg-gradient-to-r from-transparent to-sky-400/60" />
             <div className="w-2 h-2 rounded-full bg-gradient-to-br from-sky-400 to-violet" style={{ animation: "sparkle 3s ease-in-out infinite" }} />
             <div className="w-6 h-px bg-sky-400/40" />
@@ -107,15 +79,10 @@ export default function HeroSection() {
             <div className="w-6 h-px bg-sky-400/40" />
             <div className="w-2 h-2 rounded-full bg-gradient-to-br from-gold to-rose" style={{ animation: "sparkle 3s ease-in-out infinite 1s" }} />
             <div className="h-px w-10 md:w-16 bg-gradient-to-l from-transparent to-sky-400/60" />
-          </motion.div>
+          </div>
 
           {/* Photo + rings */}
-          <motion.div
-            className="relative mb-8"
-            initial={{ scale: 0.4 }}
-            animate={{ scale: 1 }}
-            transition={{ ...smoothSpring, delay: 0.8 }}
-          >
+          <div className="relative mb-8">
             {/* CSS rings — no Framer per-frame */}
             <div
               className="absolute top-1/2 left-1/2 rounded-full border border-dashed border-sky-400/10 ring-spin"
@@ -140,11 +107,9 @@ export default function HeroSection() {
             />
 
             {/* Photo */}
-            <motion.div
+            <div
               className="relative w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden shadow-glow-white group cursor-pointer gpu-layer"
               style={{ border: "3px solid rgba(255,255,255,0.7)" }}
-              whileHover={{ scale: 1.06 }}
-              transition={{ type: "spring", stiffness: 250, damping: 15 }}
             >
               <div className="w-full h-full bg-gradient-to-br from-white via-sky-50 to-sky-100 flex items-center justify-center relative overflow-hidden">
                 {/* CSS shimmer */}
@@ -156,7 +121,7 @@ export default function HeroSection() {
                   <p className="text-sky-400/80 font-body text-[10px] mt-1 tracking-wider uppercase">Ảnh bé yêu</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Orbiting accents — CSS */}
             <div className="absolute inset-[-12px] orbit" style={{ "--dur": "12s" } as React.CSSProperties}>
@@ -165,33 +130,19 @@ export default function HeroSection() {
             <div className="absolute inset-[-24px] orbit-reverse" style={{ "--dur": "18s" } as React.CSSProperties}>
               <div className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-violet to-violet-light shadow-md" />
             </div>
-          </motion.div>
+          </div>
 
           {/* Baby name */}
-          <motion.div
-            initial={{ y: 40 }}
-            animate={{ y: 0 }}
-            transition={{ ...smoothSpring, delay: 1.0 }}
-            className="mb-10"
-          >
+          <div className="mb-10">
             <p className="font-script text-2xl md:text-3xl text-sky-500 mb-1">Bé Yêu</p>
             <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold text-text-primary tracking-wide">
               {BABY.name}
             </h2>
-          </motion.div>
+          </div>
 
           {/* Save the date card */}
-          <motion.div
-            className="w-full max-w-sm md:max-w-md"
-            initial={{ y: 60 }}
-            animate={{ y: 0 }}
-            transition={{ ...smoothSpring, delay: 1.2 }}
-          >
-            <motion.div
-              className="relative rounded-[32px] p-[1.5px] overflow-hidden save-date-border"
-              whileHover={{ scale: 1.03, y: -5 }}
-              transition={{ type: "spring", stiffness: 200 }}
-            >
+          <div className="w-full max-w-sm md:max-w-md">
+            <div className="relative rounded-[32px] p-[1.5px] overflow-hidden save-date-border">
               <div className="relative rounded-[31px] bg-white/85 backdrop-blur-2xl px-6 py-6 md:px-8 md:py-7 overflow-hidden">
                 {/* Shimmer */}
                 <div className="shimmer-sweep" />
@@ -265,16 +216,11 @@ export default function HeroSection() {
                   <div className="h-px w-8 bg-gradient-to-l from-transparent to-sky-300/30" />
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Scroll indicator */}
-          <motion.div
-            className="mt-16 flex flex-col items-center gap-3"
-            initial={{ y: 10 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 2, duration: 1.2 }}
-          >
+          <div className="mt-16 flex flex-col items-center gap-3">
             <span
               className="font-heading text-[10px] text-sky-400/60 uppercase tracking-[0.3em]"
               style={{ animation: "sparkle 2.5s ease-in-out infinite" }}
@@ -287,10 +233,10 @@ export default function HeroSection() {
                 style={{ animation: "sparkle 2s ease-in-out infinite" }}
               />
             </div>
-          </motion.div>
+          </div>
 
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

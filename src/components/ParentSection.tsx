@@ -1,8 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { fadeLeft, fadeRight, fadeUp, viewport, smoothSpring } from "@/lib/motion";
-
 interface ParentProps {
   role: "father" | "mother";
   title: string;
@@ -11,7 +6,6 @@ interface ParentProps {
 
 export default function ParentSection({ role, title, message }: ParentProps) {
   const isFather = role === "father";
-  const photoVariant = isFather ? fadeLeft : fadeRight;
 
   return (
     <div className="py-10 px-4 max-w-4xl mx-auto">
@@ -21,26 +15,14 @@ export default function ParentSection({ role, title, message }: ParentProps) {
         }`}
       >
         {/* Photo */}
-        <motion.div
-          className="flex-shrink-0 relative group"
-          variants={photoVariant}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={0}
-          whileHover={{ scale: 1.05, rotateY: isFather ? 6 : -6 }}
-          transition={{ type: "spring", stiffness: 200 }}
-          style={{ perspective: 800 }}
-        >
+        <div className="flex-shrink-0 relative group">
           {/* Glow */}
-          <motion.div
+          <div
             className={`absolute inset-[-6px] rounded-3xl blur-lg ${
               isFather
                 ? "bg-gradient-to-br from-sky-300 to-sky-500"
                 : "bg-gradient-to-br from-rose to-rose-light"
-            }`}
-            animate={{ opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            } opacity-[0.3]`}
           />
 
           {/* Card */}
@@ -66,30 +48,19 @@ export default function ParentSection({ role, title, message }: ParentProps) {
           </div>
 
           {/* Badge */}
-          <motion.div
+          <div
             className={`absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full font-heading text-sm font-semibold text-white shadow-lg ${
               isFather
                 ? "bg-gradient-to-r from-sky-400 to-sky-600"
                 : "bg-gradient-to-r from-rose to-pink-400"
             }`}
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={viewport}
-            transition={{ ...smoothSpring, delay: 0.3 }}
           >
             {title}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Content */}
-        <motion.div
-          className={`text-center flex-1 ${isFather ? "md:text-left" : "md:text-right"}`}
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={1}
-        >
+        <div className={`text-center flex-1 ${isFather ? "md:text-left" : "md:text-right"}`}>
           <p className="font-script text-2xl md:text-3xl text-sky-500 mb-3">
             Lời của {title}
           </p>
@@ -104,19 +75,12 @@ export default function ParentSection({ role, title, message }: ParentProps) {
             }`}
           />
 
-          <motion.div
-            className="glass-strong rounded-2xl p-6 shadow-3d"
-            whileHover={{
-              scale: 1.02,
-              boxShadow: "0 16px 40px rgba(14,165,233,0.15)",
-            }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
+          <div className="glass-strong rounded-2xl p-6 shadow-3d">
             <p className="font-body text-lg text-text-primary/80 leading-relaxed italic">
               &ldquo;{message}&rdquo;
             </p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </div>
   );

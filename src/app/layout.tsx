@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { META } from "@/lib/constants";
-import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,9 +26,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-bg-primary antialiased">
-          <MotionProvider>{children}</MotionProvider>
-        </body>
+      <body className="min-h-screen bg-bg-primary antialiased">{children}</body>
     </html>
   );
 }

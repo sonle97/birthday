@@ -1,8 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { fadeUp, viewport, smoothSpring } from "@/lib/motion";
-
 const GALLERY_ITEMS = [
   { id: 1, label: "Nụ cười đầu tiên",  icon: "smile",  span: "col-span-2 row-span-2", aspect: "aspect-square",         gradient: "from-sky-200/60 via-sky-100/40 to-white" },
   { id: 2, label: "Bước chân nhỏ",     icon: "foot",   span: "",                       aspect: "aspect-[3/4]",           gradient: "from-cyan-100/50 via-sky-50 to-white" },
@@ -45,16 +40,6 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
-const cardVariant = {
-  hidden: { opacity: 0, y: 40, scale: 0.92 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { ...smoothSpring, delay: 0.15 + i * 0.1 },
-  }),
-};
-
 export default function PhotoGallery() {
   return (
     <section className="relative py-24 md:py-32 px-4 overflow-hidden bg-gradient-to-b from-white via-sky-50/20 to-white">
@@ -65,14 +50,7 @@ export default function PhotoGallery() {
 
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
-        <motion.div
-          className="text-center mb-12"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={0}
-        >
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
             <svg className="w-4 h-4 text-sky-400/50" viewBox="0 0 24 24" fill="currentColor">
@@ -86,34 +64,20 @@ export default function PhotoGallery() {
           <h3 className="font-heading text-2xl md:text-3xl font-bold text-text-primary">
             Album ảnh bé yêu
           </h3>
-        </motion.div>
+        </div>
 
         {/* Masonry grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-auto">
-          {GALLERY_ITEMS.map((item, index) => (
-            <motion.div
+          {GALLERY_ITEMS.map((item) => (
+            <div
               key={item.id}
               className={`${item.span} group`}
-              variants={cardVariant}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-              custom={index}
-              style={{ perspective: 800 }}
             >
-              <motion.div
+              <div
                 className={`relative ${item.aspect} w-full rounded-[20px] md:rounded-[24px] overflow-hidden cursor-pointer`}
                 style={{
                   boxShadow: "0 2px 8px rgba(14,165,233,0.08), 0 8px 24px rgba(14,165,233,0.06)",
                 }}
-                whileHover={{
-                  scale: 1.03,
-                  rotateY: 3,
-                  rotateX: -2,
-                  boxShadow: "0 16px 40px rgba(14,165,233,0.18), 0 0 0 1px rgba(14,165,233,0.08)",
-                }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 250, damping: 18 }}
               >
                 {/* Gradient background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient}`} />
@@ -126,13 +90,9 @@ export default function PhotoGallery() {
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-4 transition-all duration-500">
                   {/* Icon */}
-                  <motion.div
-                    className="w-10 h-10 md:w-14 md:h-14 text-sky-300/50 group-hover:text-sky-400/70 transition-colors duration-300 mb-2"
-                    initial={false}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                  >
+                  <div className="w-10 h-10 md:w-14 md:h-14 text-sky-300/50 group-hover:text-sky-400/70 transition-colors duration-300 mb-2">
                     {icons[item.icon]}
-                  </motion.div>
+                  </div>
 
                   {/* Label pill */}
                   <div className="px-3 py-1 rounded-full bg-white/50 backdrop-blur-sm border border-white/40 opacity-70 group-hover:opacity-100 transition-all duration-300 group-hover:bg-white/70">
@@ -155,22 +115,15 @@ export default function PhotoGallery() {
 
                 {/* Bottom shine line */}
                 <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-sky-400/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           ))}
         </div>
 
         {/* Bottom caption */}
-        <motion.p
-          className="text-center mt-8 font-body text-sm text-sky-400/50 italic"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          custom={4}
-        >
+        <p className="text-center mt-8 font-body text-sm text-sky-400/50 italic">
           Thêm ảnh vào thư mục public/images để hiển thị
-        </motion.p>
+        </p>
       </div>
     </section>
   );
