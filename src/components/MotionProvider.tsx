@@ -3,5 +3,5 @@
 import { MotionConfig } from "framer-motion";
 
 export default function MotionProvider({ children }: { children: React.ReactNode }) {
-  return <MotionConfig reducedMotion="never">{children}</MotionConfig>;
+  return <MotionConfig reducedMotion="always">{children}</MotionConfig>;
 }
