@@ -23,65 +23,72 @@ export const gentleSpring: Transition = {
 };
 
 /* ===== Reusable viewport config ===== */
-export const viewport = { once: true, margin: "0px" } as const;
+export const viewport = { once: true, margin: "-50px" } as const;
 
 /* ===== Fade / slide variants ===== */
 export const fadeUp: Variants = {
-  hidden: { y: 60 },
+  hidden: { y: 60, opacity: 0 },
   visible: (i: number = 0) => ({
     y: 0,
+    opacity: 1,
     transition: { ...smoothSpring, delay: i * 0.12 },
   }),
 };
 
 export const fadeDown: Variants = {
-  hidden: { y: -40 },
+  hidden: { y: -40, opacity: 0 },
   visible: (i: number = 0) => ({
     y: 0,
+    opacity: 1,
     transition: { ...smoothSpring, delay: i * 0.12 },
   }),
 };
 
 export const fadeLeft: Variants = {
-  hidden: { x: -60 },
+  hidden: { x: -60, opacity: 0 },
   visible: (i: number = 0) => ({
     x: 0,
+    opacity: 1,
     transition: { ...smoothSpring, delay: i * 0.12 },
   }),
 };
 
 export const fadeRight: Variants = {
-  hidden: { x: 60 },
+  hidden: { x: 60, opacity: 0 },
   visible: (i: number = 0) => ({
     x: 0,
+    opacity: 1,
     transition: { ...smoothSpring, delay: i * 0.12 },
   }),
 };
 
 /* ===== Scale variants ===== */
 export const scaleUp: Variants = {
-  hidden: { scale: 0.7 },
+  hidden: { scale: 0.7, opacity: 0 },
   visible: (i: number = 0) => ({
     scale: 1,
+    opacity: 1,
     transition: { ...snappySpring, delay: i * 0.12 },
   }),
 };
 
 export const popIn: Variants = {
-  hidden: { scale: 0.5, rotate: -8 },
+  hidden: { scale: 0.5, rotate: -8, opacity: 0 },
   visible: (i: number = 0) => ({
     scale: 1,
     rotate: 0,
+    opacity: 1,
     transition: { ...snappySpring, delay: i * 0.1 },
   }),
 };
 
 /* ===== 3D card lift ===== */
 export const cardLift: Variants = {
-  hidden: { y: 40, rotateX: 8 },
+  hidden: { y: 40, rotateX: 8, opacity: 0 },
   visible: (i: number = 0) => ({
     y: 0,
     rotateX: 0,
+    opacity: 1,
     transition: { ...smoothSpring, delay: i * 0.15 },
   }),
 };
@@ -95,9 +102,10 @@ export const staggerContainer: Variants = {
 };
 
 export const staggerItem: Variants = {
-  hidden: { y: 30 },
+  hidden: { y: 30, opacity: 0 },
   visible: {
     y: 0,
+    opacity: 1,
     transition: smoothSpring,
   },
 };
