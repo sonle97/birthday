@@ -1,10 +1,10 @@
 const GALLERY_ITEMS = [
   { id: 1, label: "Nụ cười đầu tiên",  icon: "smile",  span: "col-span-2 row-span-2", aspect: "aspect-square",         gradient: "from-sky-200/60 via-sky-100/40 to-white" },
-  { id: 2, label: "Bước chân nhỏ",     icon: "foot",   span: "",                       aspect: "aspect-[3/4]",           gradient: "from-cyan-100/50 via-sky-50 to-white" },
-  { id: 3, label: "Đôi mắt trong veo", icon: "eye",    span: "",                       aspect: "aspect-square",          gradient: "from-violet-100/30 via-sky-50 to-white" },
-  { id: 4, label: "Giấc ngủ bình yên", icon: "moon",   span: "",                       aspect: "aspect-square",          gradient: "from-indigo-100/30 via-sky-50 to-white" },
-  { id: 5, label: "Khoảnh khắc vui",   icon: "star",   span: "col-span-2",             aspect: "aspect-[2/1]",           gradient: "from-sky-100/50 via-cyan-50 to-white" },
-  { id: 6, label: "Tình yêu gia đình", icon: "heart",  span: "",                       aspect: "aspect-[3/4]",           gradient: "from-rose-100/30 via-sky-50 to-white" },
+  { id: 2, label: "Bước chân nhỏ",     icon: "foot",   span: "",                       aspect: "aspect-[3/4]",           gradient: "from-sky-100/50 via-cyan-50 to-white" },
+  { id: 3, label: "Đôi mắt trong veo", icon: "eye",    span: "",                       aspect: "aspect-square",          gradient: "from-cyan-100/40 via-sky-50 to-white" },
+  { id: 4, label: "Giấc ngủ bình yên", icon: "moon",   span: "",                       aspect: "aspect-square",          gradient: "from-sky-100/40 via-sky-50 to-white" },
+  { id: 5, label: "Khoảnh khắc vui",   icon: "star",   span: "col-span-2",             aspect: "aspect-[2/1]",           gradient: "from-sky-100/50 via-cyan-50/40 to-white" },
+  { id: 6, label: "Tình yêu gia đình", icon: "heart",  span: "",                       aspect: "aspect-[3/4]",           gradient: "from-rose-light/30 via-pink-50 to-white" },
 ];
 
 const icons: Record<string, React.ReactNode> = {
@@ -42,28 +42,28 @@ const icons: Record<string, React.ReactNode> = {
 
 export default function PhotoGallery() {
   return (
-    <section className="relative py-24 md:py-32 px-4 overflow-hidden bg-gradient-to-b from-white via-sky-50/20 to-white">
+    <section className="relative py-14 md:py-20 px-4 overflow-hidden bg-gradient-to-b from-white via-sky-50/20 to-white">
       {/* BG decoration */}
       <div className="absolute top-20 left-[-5%] w-72 h-72 bg-sky-100/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-16 right-[-5%] w-56 h-56 bg-violet-100/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-16 right-[-5%] w-56 h-56 bg-sky-200/20 rounded-full blur-3xl" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.04]" style={{ background: "radial-gradient(circle, #0ea5e9, transparent 70%)" }} />
 
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 reveal-fade-down">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
-            <svg className="w-4 h-4 text-sky-400/50" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="w-4 h-4 text-sky-600/70" viewBox="0 0 24 24" fill="currentColor">
               <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
             </svg>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-sky-300/50" />
           </div>
-          <p className="font-script text-3xl md:text-4xl text-sky-500 mb-1">
+          <p className="font-script text-3xl md:text-4xl text-sky-600 mb-1">
             Những khoảnh khắc đáng nhớ
           </p>
-          <h3 className="font-heading text-2xl md:text-3xl font-bold text-text-primary">
-            Album ảnh bé yêu
-          </h3>
+          <p className="font-heading text-[10px] font-bold text-sky-600/70 uppercase tracking-[0.4em]">
+            Photo Album
+          </p>
         </div>
 
         {/* Masonry grid */}
@@ -71,7 +71,7 @@ export default function PhotoGallery() {
           {GALLERY_ITEMS.map((item) => (
             <div
               key={item.id}
-              className={`${item.span} group`}
+              className={`${item.span} group reveal-zoom reveal-d${item.id}`}
             >
               <div
                 className={`relative ${item.aspect} w-full rounded-[20px] md:rounded-[24px] overflow-hidden cursor-pointer`}
@@ -90,7 +90,7 @@ export default function PhotoGallery() {
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-4 transition-all duration-500">
                   {/* Icon */}
-                  <div className="w-10 h-10 md:w-14 md:h-14 text-sky-300/50 group-hover:text-sky-400/70 transition-colors duration-300 mb-2">
+                  <div className={`w-10 h-10 md:w-14 md:h-14 transition-colors duration-300 mb-2 ${item.icon === "heart" ? "text-rose/50 group-hover:text-rose/70" : "text-sky-300/50 group-hover:text-sky-400/70"}`}>
                     {icons[item.icon]}
                   </div>
 
@@ -121,7 +121,7 @@ export default function PhotoGallery() {
         </div>
 
         {/* Bottom caption */}
-        <p className="text-center mt-8 font-body text-sm text-sky-400/50 italic">
+        <p className="text-center mt-8 font-body text-sm text-sky-600/70 italic reveal-fade-up reveal-d8">
           Thêm ảnh vào thư mục public/images để hiển thị
         </p>
       </div>

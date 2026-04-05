@@ -1,9 +1,5 @@
-"use client";
+/* Pure CSS balloon background — server component, zero JS at runtime */
 
-import { useEffect, useRef } from "react";
-
-
-/* ── Balloon colour palette (matches theme tokens) ── */
 const PALETTE = [
   { body: "#7dd3fc", highlight: "#bae6fd", shadow: "#0ea5e9" },
   { body: "#38bdf8", highlight: "#7dd3fc", shadow: "#0284c7" },
@@ -15,218 +11,85 @@ const PALETTE = [
   { body: "#93c5fd", highlight: "#bfdbfe", shadow: "#3b82f6" },
 ];
 
-const HOVER_RADIUS = 90;   // detect mouse within this distance
-const PUSH_FORCE = 1.8;    // push strength
-const PUSH_FRICTION = 0.96; // how quickly push decays
-
-interface Balloon {
+interface BalloonConfig {
   x: number;
-  y: number;
-  r: number;
-  color: (typeof PALETTE)[number];
-  driftX: number;
-  floatY: number;
-  phase: number;
-  swayAmp: number;
-  swaySpeed: number;
-  stringLen: number;
+  size: number;
+  colorIdx: number;
+  dur: number;
+  delay: number;
+  sway: number;
+  swayDur: number;
   opacity: number;
-  depth: number;
-  /** push velocity from mouse hover */
-  pvx: number;
-  pvy: number;
+  desktopOnly?: boolean;
 }
 
-function createBalloon(w: number, h: number): Balloon {
-  const depth = Math.random();
-  const r = 14 + depth * 22 + Math.random() * 10;
-  return {
-    x: Math.random() * w,
-    y: Math.random() * h + h * 0.1,
-    r,
-    color: PALETTE[Math.floor(Math.random() * PALETTE.length)],
-    driftX: (Math.random() - 0.5) * 0.15,
-    floatY: -(0.12 + Math.random() * 0.25 + depth * 0.15),
-    phase: Math.random() * Math.PI * 2,
-    swayAmp: 8 + Math.random() * 18,
-    swaySpeed: 0.3 + Math.random() * 0.5,
-    stringLen: 2.5 + Math.random() * 1.5,
-    opacity: 0.45 + depth * 0.4,
-    depth,
-    pvx: 0,
-    pvy: 0,
-  };
-}
-
-function drawBalloon(ctx: CanvasRenderingContext2D, b: Balloon, t: number) {
-  const sx = b.x + Math.sin(t * b.swaySpeed + b.phase) * b.swayAmp;
-  const sy = b.y;
-  const { r, color, opacity, stringLen } = b;
-
-  ctx.save();
-  ctx.globalAlpha = opacity;
-
-  /* ── String (wavy) ── */
-  const strLen = r * stringLen;
-  ctx.beginPath();
-  ctx.moveTo(sx, sy + r * 0.85);
-  const wave = Math.sin(t * b.swaySpeed * 0.8 + b.phase) * 4;
-  ctx.bezierCurveTo(
-    sx + wave,
-    sy + r * 0.85 + strLen * 0.33,
-    sx - wave * 0.6,
-    sy + r * 0.85 + strLen * 0.66,
-    sx + wave * 0.3,
-    sy + r * 0.85 + strLen,
-  );
-  ctx.strokeStyle = `rgba(148, 163, 184, ${opacity * 0.55})`;
-  ctx.lineWidth = 0.8;
-  ctx.stroke();
-
-  /* ── Balloon body ── */
-  ctx.beginPath();
-  ctx.ellipse(sx, sy, r * 0.82, r, 0, 0, Math.PI * 2);
-  const grad = ctx.createRadialGradient(
-    sx - r * 0.25, sy - r * 0.3, r * 0.1,
-    sx, sy, r,
-  );
-  grad.addColorStop(0, color.highlight);
-  grad.addColorStop(0.45, color.body);
-  grad.addColorStop(1, color.shadow);
-  ctx.fillStyle = grad;
-  ctx.fill();
-
-  /* ── Glossy highlight ── */
-  ctx.beginPath();
-  ctx.ellipse(sx - r * 0.22, sy - r * 0.32, r * 0.32, r * 0.22, -0.5, 0, Math.PI * 2);
-  const hlGrad = ctx.createRadialGradient(
-    sx - r * 0.22, sy - r * 0.32, 0,
-    sx - r * 0.22, sy - r * 0.32, r * 0.35,
-  );
-  hlGrad.addColorStop(0, "rgba(255,255,255,0.7)");
-  hlGrad.addColorStop(1, "rgba(255,255,255,0)");
-  ctx.fillStyle = hlGrad;
-  ctx.fill();
-
-  /* ── Knot ── */
-  ctx.beginPath();
-  ctx.moveTo(sx - r * 0.08, sy + r * 0.85);
-  ctx.lineTo(sx, sy + r * 0.95);
-  ctx.lineTo(sx + r * 0.08, sy + r * 0.85);
-  ctx.closePath();
-  ctx.fillStyle = color.shadow;
-  ctx.fill();
-
-  ctx.restore();
-}
+const BALLOONS: BalloonConfig[] = [
+  { x: 3,  size: 28, colorIdx: 0, dur: 24, delay: -2,  sway: 15, swayDur: 4.2, opacity: 0.5 },
+  { x: 10, size: 36, colorIdx: 1, dur: 28, delay: -8,  sway: 22, swayDur: 5.0, opacity: 0.65 },
+  { x: 18, size: 22, colorIdx: 2, dur: 20, delay: -14, sway: 12, swayDur: 3.5, opacity: 0.45 },
+  { x: 25, size: 32, colorIdx: 3, dur: 30, delay: -4,  sway: 18, swayDur: 4.8, opacity: 0.6 },
+  { x: 33, size: 26, colorIdx: 4, dur: 22, delay: -18, sway: 20, swayDur: 3.8, opacity: 0.5 },
+  { x: 40, size: 40, colorIdx: 5, dur: 32, delay: -10, sway: 25, swayDur: 5.5, opacity: 0.7 },
+  { x: 48, size: 24, colorIdx: 6, dur: 26, delay: -22, sway: 14, swayDur: 4.0, opacity: 0.45 },
+  { x: 55, size: 34, colorIdx: 7, dur: 25, delay: -6,  sway: 20, swayDur: 4.5, opacity: 0.6 },
+  { x: 62, size: 30, colorIdx: 0, dur: 28, delay: -16, sway: 16, swayDur: 5.2, opacity: 0.55 },
+  { x: 70, size: 38, colorIdx: 1, dur: 22, delay: -12, sway: 22, swayDur: 3.6, opacity: 0.65 },
+  { x: 78, size: 20, colorIdx: 2, dur: 30, delay: -20, sway: 10, swayDur: 4.3, opacity: 0.4 },
+  { x: 85, size: 32, colorIdx: 3, dur: 24, delay: -3,  sway: 18, swayDur: 5.0, opacity: 0.6 },
+  { x: 92, size: 28, colorIdx: 4, dur: 26, delay: -15, sway: 15, swayDur: 4.6, opacity: 0.5 },
+  { x: 97, size: 36, colorIdx: 5, dur: 20, delay: -9,  sway: 24, swayDur: 3.4, opacity: 0.7 },
+  // Desktop-only extras
+  { x: 7,  size: 18, colorIdx: 6, dur: 34, delay: -25, sway: 10, swayDur: 5.8, opacity: 0.35, desktopOnly: true },
+  { x: 30, size: 42, colorIdx: 7, dur: 35, delay: -7,  sway: 28, swayDur: 6.0, opacity: 0.7,  desktopOnly: true },
+  { x: 45, size: 20, colorIdx: 0, dur: 22, delay: -19, sway: 12, swayDur: 3.2, opacity: 0.4,  desktopOnly: true },
+  { x: 58, size: 30, colorIdx: 1, dur: 27, delay: -11, sway: 18, swayDur: 4.4, opacity: 0.55, desktopOnly: true },
+  { x: 75, size: 24, colorIdx: 2, dur: 30, delay: -24, sway: 14, swayDur: 5.5, opacity: 0.45, desktopOnly: true },
+  { x: 88, size: 34, colorIdx: 3, dur: 23, delay: -1,  sway: 20, swayDur: 4.0, opacity: 0.6,  desktopOnly: true },
+];
 
 export default function ParticlesBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: -9999, y: -9999 });
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animId: number;
-    let balloons: Balloon[] = [];
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    const init = () => {
-      balloons = [];
-      const count = Math.min(50, Math.floor(window.innerWidth / 30));
-      for (let i = 0; i < count; i++) {
-        balloons.push(createBalloon(canvas.width, canvas.height));
-      }
-      balloons.sort((a, b) => a.depth - b.depth);
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      mouseRef.current.x = e.clientX;
-      mouseRef.current.y = e.clientY;
-    };
-
-    const onMouseLeave = () => {
-      mouseRef.current.x = -9999;
-      mouseRef.current.y = -9999;
-    };
-
-    const loop = () => {
-      const w = canvas.width;
-      const h = canvas.height;
-      const t = Date.now() * 0.001;
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
-
-      ctx.clearRect(0, 0, w, h);
-
-      for (const b of balloons) {
-        /* ── Mouse hover push ── */
-        const bx = b.x + Math.sin(t * b.swaySpeed + b.phase) * b.swayAmp;
-        const by = b.y;
-        const dx = bx - mx;
-        const dy = by - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < HOVER_RADIUS && dist > 0) {
-          const force = (1 - dist / HOVER_RADIUS) * PUSH_FORCE;
-          b.pvx += (dx / dist) * force;
-          b.pvy += (dy / dist) * force;
-        }
-
-        // Apply push velocity & decay
-        b.x += b.driftX + b.pvx;
-        b.y += b.floatY + b.pvy;
-        b.pvx *= PUSH_FRICTION;
-        b.pvy *= PUSH_FRICTION;
-
-        // Tiny residual — zero it out
-        if (Math.abs(b.pvx) < 0.01) b.pvx = 0;
-        if (Math.abs(b.pvy) < 0.01) b.pvy = 0;
-
-        // Wrap
-        if (b.y + b.r * 4 < 0) {
-          b.y = h + b.r * 2;
-          b.x = Math.random() * w;
-          b.pvx = 0;
-          b.pvy = 0;
-        }
-        if (b.x < -b.r * 2) b.x = w + b.r;
-        if (b.x > w + b.r * 2) b.x = -b.r;
-
-        drawBalloon(ctx, b, t);
-      }
-
-      animId = requestAnimationFrame(loop);
-    };
-
-    resize();
-    init();
-    loop();
-
-    window.addEventListener("resize", () => { resize(); init(); });
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseleave", onMouseLeave);
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", () => { resize(); init(); });
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseleave", onMouseLeave);
-    };
-  }, []);
-
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none"
-      style={{ opacity: 0.55 }}
-    />
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" style={{ opacity: 0.55 }}>
+      {BALLOONS.map((b, i) => {
+        const color = PALETTE[b.colorIdx % PALETTE.length];
+        return (
+          <div
+            key={i}
+            className={`absolute balloon-float ${b.desktopOnly ? "hidden md:block" : ""}`}
+            style={{
+              left: `${b.x}%`,
+              bottom: -80,
+              animation: `balloonFloat ${b.dur}s linear infinite`,
+              animationDelay: `${b.delay}s`,
+              willChange: "transform",
+            }}
+          >
+            <div
+              className="balloon-sway"
+              style={{
+                animation: `balloonSway ${b.swayDur}s ease-in-out infinite`,
+                animationDelay: `${b.delay * 0.7}s`,
+                "--sway": b.sway,
+              } as React.CSSProperties}
+            >
+              <div
+                className="balloon-css"
+                style={{
+                  width: b.size * 0.82,
+                  height: b.size,
+                  opacity: b.opacity,
+                  "--bl-hl": color.highlight,
+                  "--bl-body": color.body,
+                  "--bl-shadow": color.shadow,
+                  "--bl-size": b.size,
+                } as React.CSSProperties}
+              >
+                <div className="balloon-string" />
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }

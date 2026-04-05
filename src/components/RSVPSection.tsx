@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import FloralDivider from "./FloralDivider";
 
 export default function RSVPSection() {
   const [name, setName] = useState("");
@@ -21,7 +20,7 @@ export default function RSVPSection() {
 
   return (
     <section
-      className="relative py-20 px-4 overflow-hidden"
+      className="relative py-14 px-4 overflow-hidden"
       style={{
         background: "linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%)",
       }}
@@ -30,22 +29,27 @@ export default function RSVPSection() {
       <div className="absolute bottom-10 right-[-5%] w-64 h-64 bg-sky-100/40 rounded-full blur-3xl" />
 
       <div className="max-w-lg mx-auto text-center relative z-10">
-        <div>
-          <p className="font-script text-2xl md:text-3xl text-sky-500 mb-1">
+        <div className="reveal-fade-down">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
+            <svg className="w-4 h-4 text-sky-600/70" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2z" />
+            </svg>
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-sky-300/50" />
+          </div>
+          <p className="font-script text-3xl md:text-4xl text-sky-600 mb-1">
             Xác nhận tham dự
           </p>
-          <h3 className="font-heading text-2xl md:text-3xl font-bold text-text-primary mb-2">
-            XÁC NHẬN THAM DỰ
-          </h3>
-          <FloralDivider />
-          <p className="font-body text-text-primary/70 mt-3 mb-8 leading-relaxed">
-            Hãy xác nhận sự có mặt của bạn để chúng mình chuẩn bị đón tiếp một
-            cách chu đáo nhất. Trân trọng!
+          <p className="font-heading text-[10px] font-bold text-sky-600/70 uppercase tracking-[0.4em] mb-4">
+            RSVP
+          </p>
+          <p className="font-body text-text-primary/85 mb-8 leading-relaxed max-w-sm mx-auto">
+            Vui lòng xác nhận sự có mặt của bạn để gia đình chuẩn bị đón tiếp chu đáo nhất
           </p>
         </div>
 
         {!submitted ? (
-          <div style={{ perspective: 1000 }}>
+          <div className="reveal-blur reveal-d2" style={{ perspective: 1000 }}>
             <form
               onSubmit={handleSubmit}
               className="glass-strong rounded-3xl shadow-3d-lg p-8 text-left"
@@ -53,7 +57,7 @@ export default function RSVPSection() {
               {/* Name */}
               <div className="mb-6">
                 <label className="block font-body text-text-primary text-sm font-medium mb-2">
-                  Họ và tên <span className="text-rose">*</span>
+                  Họ và tên <span className="text-sky-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -68,7 +72,7 @@ export default function RSVPSection() {
               {/* Attend */}
               <div className="mb-6">
                 <label className="block font-body text-text-primary text-sm font-medium mb-3">
-                  Bạn có tham dự không? <span className="text-rose">*</span>
+                  Bạn có tham dự không? <span className="text-sky-500">*</span>
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   {(["yes", "no"] as const).map((opt) => (
@@ -80,8 +84,8 @@ export default function RSVPSection() {
                         attending === opt
                           ? opt === "yes"
                             ? "border-sky-400 bg-sky-50 text-sky-600 shadow-glow-sky"
-                            : "border-rose bg-rose-light/20 text-rose"
-                          : "border-sky-200/50 bg-white/40 text-text-primary/60 hover:border-sky-300"
+                            : "border-sky-300 bg-sky-50/50 text-sky-600"
+                          : "border-sky-200/50 bg-white/40 text-text-primary/75 hover:border-sky-300"
                       }`}
                     >
                       {opt === "yes" ? "✓ Có, tôi sẽ đến" : "✗ Rất tiếc"}
@@ -147,7 +151,7 @@ export default function RSVPSection() {
           </div>
         ) : (
           <div
-            className="glass-strong rounded-3xl shadow-3d-lg p-8"
+            className="glass-strong rounded-3xl shadow-3d-lg p-8 reveal-zoom reveal-d2"
             style={{ perspective: 800 }}
           >
             <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-br from-sky-100 to-sky-200 flex items-center justify-center shadow-glow-sky">
@@ -168,7 +172,7 @@ export default function RSVPSection() {
             <h4 className="font-heading text-2xl font-bold text-text-primary mb-3">
               Cảm ơn bạn!
             </h4>
-            <p className="font-body text-text-primary/70 leading-relaxed">
+            <p className="font-body text-text-primary/85 leading-relaxed">
               {attending === "yes"
                 ? `Chúng tôi rất vui khi ${name} sẽ đến tham dự cùng ${guests} người. Hẹn gặp bạn tại buổi tiệc!`
                 : `Cảm ơn ${name} đã phản hồi. Chúng tôi rất tiếc khi bạn không thể tham dự.`}

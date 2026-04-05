@@ -1,5 +1,7 @@
 import { BABY, EVENT } from "@/lib/constants";
 
+/* ---------- static decorative data ---------- */
+
 const sparkles = [
   { top: "12%", left: "8%",  size: 2.0, delay: "0s",   dur: "2.8s" },
   { top: "25%", left: "82%", size: 3.2, delay: "0.4s", dur: "3.5s" },
@@ -19,13 +21,13 @@ export default function HeroSection() {
 
       {/* ====== BG LAYERS (all CSS, zero JS per-frame) ====== */}
 
-      {/* Base mesh gradient — static, GPU-promoted */}
+      {/* Base mesh gradient */}
       <div className="absolute inset-0 hero-mesh gpu-layer" />
 
       {/* Colour sweep — CSS animation */}
       <div className="colour-sweep" />
 
-      {/* Morphing blobs — CSS animation */}
+      {/* Morphing blobs */}
       <div
         className="absolute blob gpu-layer blur-2xl"
         style={{ top: "-12%", right: "-5%", width: 420, height: 420, background: "rgba(56,189,248,0.15)", "--dur": "14s", "--delay": "0s" } as React.CSSProperties}
@@ -55,9 +57,9 @@ export default function HeroSection() {
         <div className="flex flex-col items-center text-center">
 
           {/* Badge */}
-          <div>
+          <div className="hero-entrance" style={{ "--entrance-delay": "0.2s" } as React.CSSProperties}>
             <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-dark shadow-3d mb-6">
-              <span className="sparkle-dot w-1.5 h-1.5 rounded-full bg-sky-400" style={{ animation: "sparkle 2s ease-in-out infinite" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-400" style={{ animation: "sparkle 2s ease-in-out infinite" }} />
               <span className="font-heading text-[11px] font-semibold text-sky-700 tracking-[0.25em] uppercase">
                 Thiệp mời thôi nôi
               </span>
@@ -66,24 +68,33 @@ export default function HeroSection() {
           </div>
 
           {/* Subtitle */}
-          <p className="font-body text-sm md:text-base text-sky-600/60 tracking-[0.2em] uppercase mb-6">
+          <p
+            className="font-body text-sm md:text-base text-sky-700/80 tracking-[0.2em] uppercase mb-6 hero-entrance"
+            style={{ "--entrance-delay": "0.6s" } as React.CSSProperties}
+          >
             {EVENT.subtitle}
           </p>
 
           {/* Divider */}
-          <div className="flex items-center gap-3 mb-8">
+          <div
+            className="flex items-center gap-3 mb-8 hero-entrance-scale"
+            style={{ "--entrance-delay": "0.7s" } as React.CSSProperties}
+          >
             <div className="h-px w-10 md:w-16 bg-gradient-to-r from-transparent to-sky-400/60" />
             <div className="w-2 h-2 rounded-full bg-gradient-to-br from-sky-400 to-violet" style={{ animation: "sparkle 3s ease-in-out infinite" }} />
             <div className="w-6 h-px bg-sky-400/40" />
             <div className="w-1.5 h-1.5 rounded-full bg-gold" style={{ animation: "sparkle 2.5s ease-in-out infinite 0.5s" }} />
             <div className="w-6 h-px bg-sky-400/40" />
-            <div className="w-2 h-2 rounded-full bg-gradient-to-br from-gold to-rose" style={{ animation: "sparkle 3s ease-in-out infinite 1s" }} />
+            <div className="w-2 h-2 rounded-full bg-gradient-to-br from-gold to-gold-light" style={{ animation: "sparkle 3s ease-in-out infinite 1s" }} />
             <div className="h-px w-10 md:w-16 bg-gradient-to-l from-transparent to-sky-400/60" />
           </div>
 
           {/* Photo + rings */}
-          <div className="relative mb-8">
-            {/* CSS rings — no Framer per-frame */}
+          <div
+            className="relative mb-8 hero-entrance-scale"
+            style={{ "--entrance-delay": "0.8s" } as React.CSSProperties}
+          >
+            {/* CSS rings */}
             <div
               className="absolute top-1/2 left-1/2 rounded-full border border-dashed border-sky-400/10 ring-spin"
               style={{ width: 180, height: 180, marginTop: -90, marginLeft: -90, "--dur": "25s" } as React.CSSProperties}
@@ -97,7 +108,7 @@ export default function HeroSection() {
               style={{ width: 340, height: 340, marginTop: -170, marginLeft: -170, "--dur": "50s" } as React.CSSProperties}
             />
 
-            {/* Glow — static radial, CSS pulse */}
+            {/* Glow */}
             <div
               className="absolute inset-[-16px] rounded-full"
               style={{
@@ -108,7 +119,7 @@ export default function HeroSection() {
 
             {/* Photo */}
             <div
-              className="relative w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden shadow-glow-white group cursor-pointer gpu-layer"
+              className="relative w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden shadow-glow-white group cursor-pointer gpu-layer transition-transform duration-300 hover:scale-105"
               style={{ border: "3px solid rgba(255,255,255,0.7)" }}
             >
               <div className="w-full h-full bg-gradient-to-br from-white via-sky-50 to-sky-100 flex items-center justify-center relative overflow-hidden">
@@ -123,7 +134,7 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Orbiting accents — CSS */}
+            {/* Orbiting accents */}
             <div className="absolute inset-[-12px] orbit" style={{ "--dur": "12s" } as React.CSSProperties}>
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-gold to-gold-light shadow-glow-gold" />
             </div>
@@ -133,16 +144,22 @@ export default function HeroSection() {
           </div>
 
           {/* Baby name */}
-          <div className="mb-10">
-            <p className="font-script text-2xl md:text-3xl text-sky-500 mb-1">Bé Yêu</p>
+          <div
+            className="mb-10 hero-entrance"
+            style={{ "--entrance-delay": "1.0s" } as React.CSSProperties}
+          >
+            <p className="font-script text-2xl md:text-3xl text-sky-600 mb-1">Bé Yêu</p>
             <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold text-text-primary tracking-wide">
               {BABY.name}
             </h2>
           </div>
 
           {/* Save the date card */}
-          <div className="w-full max-w-sm md:max-w-md">
-            <div className="relative rounded-[32px] p-[1.5px] overflow-hidden save-date-border">
+          <div
+            className="w-full max-w-sm md:max-w-md hero-entrance"
+            style={{ "--entrance-delay": "1.2s" } as React.CSSProperties}
+          >
+            <div className="relative rounded-[32px] p-[1.5px] overflow-hidden save-date-border transition-transform duration-300 hover:scale-[1.03] hover:-translate-y-1">
               <div className="relative rounded-[31px] bg-white/85 backdrop-blur-2xl px-6 py-6 md:px-8 md:py-7 overflow-hidden">
                 {/* Shimmer */}
                 <div className="shimmer-sweep" />
@@ -151,7 +168,6 @@ export default function HeroSection() {
                 <div className="relative flex items-center justify-center gap-2 mb-5">
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent to-sky-300/40" />
                   <div className="flex items-center gap-2 px-3">
-                    {/* Calendar icon */}
                     <svg className="w-3.5 h-3.5 text-sky-400" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clipRule="evenodd" />
                     </svg>
@@ -220,9 +236,12 @@ export default function HeroSection() {
           </div>
 
           {/* Scroll indicator */}
-          <div className="mt-16 flex flex-col items-center gap-3">
+          <div
+            className="mt-16 flex flex-col items-center gap-3 hero-entrance"
+            style={{ "--entrance-delay": "2s" } as React.CSSProperties}
+          >
             <span
-              className="font-heading text-[10px] text-sky-400/60 uppercase tracking-[0.3em]"
+              className="font-heading text-[10px] text-sky-500/80 uppercase tracking-[0.3em]"
               style={{ animation: "sparkle 2.5s ease-in-out infinite" }}
             >
               Cuộn xuống

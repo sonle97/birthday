@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/* ===== Mobile compatibility: remove "in oklab" from gradients =====
+   Tailwind v4 adds "in oklab" color interpolation to gradients by default.
+   This is unsupported on iOS < 16.2 / Chrome < 111, causing ALL gradients
+   to silently fail (background-image: none). Override here. */
+.bg-gradient-to-t  { --tw-gradient-position: to top; }
+.bg-gradient-to-b  { --tw-gradient-position: to bottom; }
+.bg-gradient-to-l  { --tw-gradient-position: to left; }
+.bg-gradient-to-r  { --tw-gradient-position: to right; }
+.bg-gradient-to-br { --tw-gradient-position: to bottom right; }
+.bg-gradient-to-bl { --tw-gradient-position: to bottom left; }
+.bg-gradient-to-tr { --tw-gradient-position: to top right; }
+.bg-gradient-to-tl { --tw-gradient-position: to top left; }
+
 @theme inline {
   --color-sky-50: #f0f9ff;
   --color-sky-100: #e0f2fe;
@@ -25,9 +38,9 @@
   --color-text-primary: #0c4a6e;
   --color-text-secondary: #0369a1;
 
-  --font-heading: "Space Grotesk", "Inter", sans-serif;
-  --font-script: "Dancing Script", cursive;
-  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-heading: var(--font-heading-next, "Space Grotesk"), "Inter", sans-serif;
+  --font-script: var(--font-script-next, "Dancing Script"), cursive;
+  --font-body: var(--font-body-next, "Plus Jakarta Sans"), system-ui, sans-serif;
 }
 
 :root {
@@ -35,65 +48,86 @@
   --foreground: #0c4a6e;
 }
 
-* { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  overflow-x: hidden;
+  font-family: var(--font-body-next, "Plus Jakarta Sans"), system-ui, sans-serif;
+  overflow-x: clip;
 }
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #e0f2fe; }
 ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #38bdf8, #0ea5e9); border-radius: 3px; }
 
-/* ===== Glass morphism ===== */
+/* ===== Glass morphism (mobile: opaque bg, desktop: backdrop-filter) ===== */
 .glass {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 .glass-strong {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.35);
 }
 .glass-sky {
-  background: rgba(224, 242, 254, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(224, 242, 254, 0.65);
   border: 1px solid rgba(186, 230, 253, 0.5);
 }
 .glass-dark {
-  background: rgba(7, 89, 133, 0.08);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(7, 89, 133, 0.15);
   border: 1px solid rgba(14, 165, 233, 0.12);
 }
+@media (min-width: 768px) {
+  .glass {
+    background: rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.25);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+  }
+  .glass-sky {
+    background: rgba(224, 242, 254, 0.4);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+  .glass-dark {
+    background: rgba(7, 89, 133, 0.08);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+  }
+}
 
-/* ===== Text gradients ===== */
+/* ===== Text gradients (color fallback for mobile) ===== */
 .text-gradient-sky {
+  color: #0ea5e9;
   background: linear-gradient(135deg, #0ea5e9, #38bdf8, #7dd3fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .text-gradient-hero {
+  color: #0369a1;
   background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 40%, #38bdf8 60%, #7dd3fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .text-gradient-gold {
+  color: #f0c456;
   background: linear-gradient(135deg, #f0c456, #d4a20a, #fde68a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .text-gradient-warm {
+  color: #f0c456;
   background: linear-gradient(135deg, #f0c456 0%, #fb923c 50%, #fb7185 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -143,18 +177,68 @@ body {
     linear-gradient(180deg, #e0f2fe 0%, #f0f9ff 30%, #ffffff 100%);
 }
 
+/* ===== CSS Balloon background ===== */
+@keyframes balloonFloat {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-110vh - 100px)); }
+}
+@keyframes balloonSway {
+  0%, 100% { transform: translateX(calc(-1px * var(--sway, 15))); }
+  50% { transform: translateX(calc(1px * var(--sway, 15))); }
+}
+.balloon-css {
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 38% 35%,
+    var(--bl-hl) 0%,
+    var(--bl-body) 45%,
+    var(--bl-shadow) 100%
+  );
+  position: relative;
+}
+.balloon-css::before {
+  content: '';
+  position: absolute;
+  width: 38%;
+  height: 28%;
+  top: 18%;
+  left: 20%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.65), transparent);
+  transform: rotate(-25deg);
+}
+.balloon-css::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 6px solid var(--bl-shadow);
+}
+.balloon-string {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 1px;
+  margin-top: 5px;
+  height: calc(var(--bl-size, 30) * 2px);
+  background: linear-gradient(to bottom, rgba(148,163,184,0.35), rgba(148,163,184,0.05));
+}
+
 /* ===== GPU-promoted layers ===== */
 .gpu-layer {
-  will-change: transform;
   transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 /* ===== Reduced motion: keep animations but simplify ===== */
 @media (prefers-reduced-motion: reduce) {
   .sparkle,
   .colour-sweep,
-  .blob {
+  .blob,
+  .balloon-float,
+  .balloon-sway {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
@@ -254,29 +338,75 @@ body {
   will-change: transform;
 }
 
-/* ===== Save the Date animated gradient border ===== */
-@keyframes borderRotate {
-  0%   { --border-angle: 0deg; }
-  100% { --border-angle: 360deg; }
+/* ===== Hero entrance animations ===== */
+@keyframes heroSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes heroScaleIn {
+  from { opacity: 0; transform: scale(0.4); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.hero-entrance {
+  opacity: 0;
+  animation: heroSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--entrance-delay, 0s);
+}
+.hero-entrance-scale {
+  opacity: 0;
+  animation: heroScaleIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--entrance-delay, 0s);
+}
+
+/* ===== Floating glass orbs ===== */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-20px) scale(1.05); }
+}
+.float-slow {
+  animation: floatSlow 7s ease-in-out infinite;
+  will-change: transform;
+}
+.float-slow-reverse {
+  animation: floatSlow 9s ease-in-out infinite reverse;
+  will-change: transform;
+}
+
+/* ===== Save the Date gradient border ===== */
+/* Static gradient background — the inner child's bg creates the "border".
+   No pseudo-element or overflow tricks needed → works on all mobile browsers. */
 .save-date-border {
-  background: conic-gradient(
-    from var(--border-angle, 0deg),
-    rgba(56,189,248,0.5),
-    rgba(255,255,255,0.6),
-    rgba(139,92,246,0.3),
-    rgba(240,196,86,0.3),
-    rgba(56,189,248,0.5)
+  background: linear-gradient(
+    135deg,
+    rgba(56,189,248,0.45) 0%,
+    rgba(186,230,253,0.5) 25%,
+    rgba(139,92,246,0.25) 50%,
+    rgba(240,196,86,0.3) 75%,
+    rgba(56,189,248,0.45) 100%
   );
-  animation: borderRotate 6s linear infinite;
-  will-change: auto;
 }
-@supports (background: conic-gradient(from 0deg, red, blue)) {
-  @property --border-angle {
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-  }
+
+/* ===== Swiper Love Story overrides ===== */
+.story-pagination .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: rgba(186,230,253,0.5);
+  opacity: 1;
+  transition: all 0.3s;
+  border-radius: 4px;
+}
+.story-pagination .swiper-pagination-bullet-active {
+  width: 24px;
+  background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+}
+/* Inactive slides fade */
+.swiper-slide:not(.swiper-slide-active) {
+  opacity: 0.5;
+  transition: opacity 0.4s;
+}
+.swiper-slide-active {
+  opacity: 1;
+  transition: opacity 0.4s;
 }
 
 /* ============================================================
@@ -354,4 +484,85 @@ body {
   transform-origin: 30px 6px;
   animation: copterSpin 0.4s linear infinite;
   will-change: transform;
+}
+
+/* ============================================================
+   SCROLL REVEAL ANIMATION SYSTEM
+   ============================================================ */
+
+/* --- Base transition for all reveal types --- */
+.reveal-fade-up,
+.reveal-fade-down,
+.reveal-fade-left,
+.reveal-fade-right,
+.reveal-zoom,
+.reveal-blur,
+.reveal-flip,
+.reveal-rotate {
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* --- Initial (hidden) states --- */
+.reveal-fade-up    { opacity: 0; transform: translateY(50px); }
+.reveal-fade-down  { opacity: 0; transform: translateY(-35px); }
+.reveal-fade-left  { opacity: 0; transform: translateX(-50px); }
+.reveal-fade-right { opacity: 0; transform: translateX(50px); }
+.reveal-zoom       { opacity: 0; transform: scale(0.82); }
+.reveal-blur       { opacity: 0; filter: blur(12px); transform: scale(0.96); }
+.reveal-flip       { opacity: 0; transform: perspective(800px) rotateX(12deg) translateY(30px); }
+.reveal-rotate     { opacity: 0; transform: rotate(-4deg) scale(0.92) translateY(25px); }
+
+/* --- Visible states (self-triggered or parent-triggered by .in-view) --- */
+.in-view.reveal-fade-up,
+.in-view.reveal-fade-down,
+.in-view.reveal-fade-left,
+.in-view.reveal-fade-right,
+.in-view.reveal-zoom,
+.in-view.reveal-blur,
+.in-view.reveal-flip,
+.in-view.reveal-rotate,
+.in-view .reveal-fade-up,
+.in-view .reveal-fade-down,
+.in-view .reveal-fade-left,
+.in-view .reveal-fade-right,
+.in-view .reveal-zoom,
+.in-view .reveal-blur,
+.in-view .reveal-flip,
+.in-view .reveal-rotate {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* --- Stagger delay modifiers --- */
+.reveal-d1  { transition-delay: 100ms; }
+.reveal-d2  { transition-delay: 200ms; }
+.reveal-d3  { transition-delay: 300ms; }
+.reveal-d4  { transition-delay: 400ms; }
+.reveal-d5  { transition-delay: 500ms; }
+.reveal-d6  { transition-delay: 600ms; }
+.reveal-d7  { transition-delay: 700ms; }
+.reveal-d8  { transition-delay: 800ms; }
+.reveal-d9  { transition-delay: 900ms; }
+.reveal-d10 { transition-delay: 1000ms; }
+
+/* --- Reduced motion: instant reveal --- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-fade-up,
+  .reveal-fade-down,
+  .reveal-fade-left,
+  .reveal-fade-right,
+  .reveal-zoom,
+  .reveal-blur,
+  .reveal-flip,
+  .reveal-rotate {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
 }

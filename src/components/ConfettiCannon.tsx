@@ -16,10 +16,9 @@ interface Particle {
   baseOpacity: number;
   opacity: number;
   decay: number;
-  shape: number; // 0 circle, 1 rect, 2 star, 3 ring
+  shape: number;
   trail: { x: number; y: number }[];
   age: number;
-  /** twinkle frequency — random per particle */
   twinkleSpeed: number;
   twinklePhase: number;
 }
@@ -32,13 +31,7 @@ const COLORS = [
   "#a5f3fc", "#fbbf24",
 ];
 
-function spawnFromCorner(
-  ox: number,
-  oy: number,
-  tx: number,
-  ty: number,
-  count: number,
-): Particle[] {
+function spawnFromCorner(ox: number, oy: number, tx: number, ty: number, count: number): Particle[] {
   const ps: Particle[] = [];
   const dx = tx - ox;
   const dy = ty - oy;
@@ -49,7 +42,6 @@ function spawnFromCorner(
     const spread = (Math.random() - 0.5) * 0.6;
     const angle = baseAngle + spread;
     const speed = (dist / 48) * (0.65 + Math.random() * 0.7);
-
     const baseOpacity = 0.55 + Math.random() * 0.35;
 
     ps.push({
@@ -76,7 +68,6 @@ function spawnFromCorner(
 }
 
 function drawParticle(ctx: CanvasRenderingContext2D, p: Particle, t: number) {
-  // ── Twinkle: modulate opacity with a sine wave while falling ──
   const twinkle = 0.5 + 0.5 * Math.sin(t * p.twinkleSpeed + p.twinklePhase);
   const finalOpacity = p.opacity * (0.5 + twinkle * 0.5);
 
@@ -122,7 +113,6 @@ function drawParticle(ctx: CanvasRenderingContext2D, p: Particle, t: number) {
   } else if (p.shape === 1) {
     ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
   } else if (p.shape === 2) {
-    // star
     const s = p.size / 2;
     ctx.beginPath();
     for (let j = 0; j < 10; j++) {
@@ -134,7 +124,6 @@ function drawParticle(ctx: CanvasRenderingContext2D, p: Particle, t: number) {
     ctx.closePath();
     ctx.fill();
   } else {
-    // ring
     ctx.beginPath();
     ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
     ctx.lineWidth = 1.2;
@@ -154,6 +143,7 @@ export default function ConfettiCannon({ sectionRef }: Props) {
   const particlesRef = useRef<Particle[]>([]);
   const animRef = useRef<number>(0);
   const spawnTimerRef = useRef<number>(0);
+  const isVisibleRef = useRef(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -170,6 +160,12 @@ export default function ConfettiCannon({ sectionRef }: Props) {
     syncSize();
 
     const loop = () => {
+      // Only run animation loop when section is visible
+      if (!isVisibleRef.current) {
+        animRef.current = 0;
+        return;
+      }
+
       const w = canvas.width;
       const h = canvas.height;
       const t = Date.now() * 0.001;
@@ -196,9 +192,12 @@ export default function ConfettiCannon({ sectionRef }: Props) {
       particlesRef.current = alive;
       animRef.current = requestAnimationFrame(loop);
     };
-    loop();
 
-    /* ── Spawn: both corners every tick, more particles ── */
+    const startLoop = () => {
+      if (animRef.current) return;
+      animRef.current = requestAnimationFrame(loop);
+    };
+
     const startSpawning = () => {
       if (spawnTimerRef.current) return;
 
@@ -210,7 +209,6 @@ export default function ConfettiCannon({ sectionRef }: Props) {
         const tx = w / 2 + (Math.random() - 0.5) * 60;
         const ty = h * 0.38 + (Math.random() - 0.5) * 20;
 
-        // Alternate corners, 4 particles per burst
         if (fromLeft) {
           particlesRef.current.push(...spawnFromCorner(0, h, tx, ty, 4));
         } else {
@@ -230,8 +228,15 @@ export default function ConfettiCannon({ sectionRef }: Props) {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) startSpawning();
-          else stopSpawning();
+          if (entry.isIntersecting) {
+            isVisibleRef.current = true;
+            startSpawning();
+            startLoop();
+          } else {
+            isVisibleRef.current = false;
+            stopSpawning();
+            // animation loop will self-stop on next frame
+          }
         }
       },
       { rootMargin: "-15% 0px -15% 0px", threshold: 0 },
@@ -241,6 +246,7 @@ export default function ConfettiCannon({ sectionRef }: Props) {
 
     return () => {
       observer.disconnect();
+      isVisibleRef.current = false;
       cancelAnimationFrame(animRef.current);
       stopSpawning();
       window.removeEventListener("resize", syncSize);

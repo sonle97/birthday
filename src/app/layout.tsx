@@ -1,6 +1,28 @@
 import type { Metadata } from "next";
+import { Space_Grotesk, Plus_Jakarta_Sans, Great_Vibes } from "next/font/google";
 import { META } from "@/lib/constants";
 import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-heading-next",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-body-next",
+  display: "swap",
+});
+
+const greatVibes = Great_Vibes({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400"],
+  variable: "--font-script-next",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: META.title,
@@ -13,19 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Dancing+Script:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="vi" className={`${spaceGrotesk.variable} ${plusJakarta.variable} ${greatVibes.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-bg-primary antialiased">{children}</body>
     </html>
   );

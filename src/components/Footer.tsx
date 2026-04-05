@@ -25,7 +25,7 @@ export default function Footer() {
       >
         {/* Ambient blobs */}
         <div className="absolute top-0 left-[10%] w-48 h-48 bg-sky-300/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-[10%] w-40 h-40 bg-violet-300/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-[10%] w-40 h-40 bg-sky-200/8 rounded-full blur-3xl" />
         {/* Stars */}
         <div className="sparkle absolute top-[15%] left-[20%]" style={{ width: 2, height: 2, "--dur": "3s", "--delay": "0s" } as React.CSSProperties} />
         <div className="sparkle absolute top-[25%] right-[25%]" style={{ width: 2.5, height: 2.5, "--dur": "2.5s", "--delay": "1s" } as React.CSSProperties} />
@@ -35,26 +35,26 @@ export default function Footer() {
         <div className="max-w-md mx-auto relative z-10">
 
           {/* ── Thank you ── */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 reveal-fade-up">
             <div className="inline-block mb-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose/80 to-rose flex items-center justify-center shadow-lg" style={{ boxShadow: "0 6px 20px rgba(251,113,133,0.3)" }}>
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center shadow-lg" style={{ boxShadow: "0 6px 20px rgba(14,165,233,0.3)" }}>
                 <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                 </svg>
               </div>
             </div>
-            <p className="font-script text-3xl md:text-4xl text-sky-700/80 mb-3 leading-tight">
+            <p className="font-script text-3xl md:text-4xl text-sky-800 mb-3 leading-tight">
               Trân trọng cảm ơn
             </p>
-            <p className="font-body text-sm md:text-base text-sky-600/50 leading-relaxed max-w-xs mx-auto">
+            <p className="font-body text-sm md:text-base text-sky-700/70 leading-relaxed max-w-xs mx-auto">
               Sự hiện diện của Quý khách là món quà quý giá nhất trong ngày đặc biệt này
             </p>
           </div>
 
           {/* ── Family signature card ── */}
-          <div className="mb-10">
+          <div className="mb-10 reveal-zoom reveal-d2">
             <div className="relative mx-auto max-w-md rounded-[32px] p-[1.5px] save-date-border overflow-hidden">
-              <div className="relative rounded-[31px] bg-white/95 backdrop-blur-2xl overflow-hidden">
+              <div className="relative rounded-[31px] bg-white overflow-hidden">
                 <div className="shimmer-sweep" />
 
                 {/* Decorative header area */}
@@ -94,7 +94,7 @@ export default function Footer() {
                 <div className="px-8 md:px-12 pb-7 text-center">
                   <div className="flex items-center justify-center gap-2 mb-3">
                     <div className="h-px w-6 bg-gradient-to-r from-transparent to-sky-300/40" />
-                    <p className="font-heading text-[9px] font-bold text-sky-400/60 uppercase tracking-[0.35em]">
+                    <p className="font-heading text-[9px] font-bold text-sky-500/80 uppercase tracking-[0.35em]">
                       With love from
                     </p>
                     <div className="h-px w-6 bg-gradient-to-l from-transparent to-sky-300/40" />
@@ -116,21 +116,21 @@ export default function Footer() {
           </div>
 
           {/* ── Credits ── */}
-          <div className="text-center">
+          <div className="text-center reveal-fade-up reveal-d4">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-sky-400/20" />
               <div className="w-1 h-1 rounded-full bg-sky-400/30" />
               <div className="h-px w-12 bg-gradient-to-l from-transparent to-sky-400/20" />
             </div>
-            <p className="font-body text-sky-600/40 text-xs">
+            <p className="font-body text-sky-700/60 text-xs">
               Designed with{" "}
-              <span className="text-rose/60 inline-block">
+              <span className="text-rose inline-block">
                 &#10084;
               </span>{" "}
               by{" "}
-              <span className="font-semibold text-sky-500/50">Thiệp Online</span>
+              <span className="font-semibold text-sky-600/70">Thiệp Online</span>
             </p>
-            <p className="font-body text-sky-400/30 text-[10px] mt-1">
+            <p className="font-body text-sky-600/50 text-[10px] mt-1">
               &copy; {EVENT.year} — Thiệp mời thôi nôi bé {BABY.name}
             </p>
           </div>

@@ -10,6 +10,7 @@ import VenueSection from "@/components/VenueSection";
 import RSVPSection from "@/components/RSVPSection";
 import PhotoGallery from "@/components/PhotoGallery";
 import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
 import { PARENTS } from "@/lib/constants";
 
 export default function Home() {
@@ -20,35 +21,61 @@ export default function Home() {
 
       <div className="relative z-10">
         <HeroSection />
-        <InvitationSection />
 
-        <section className="py-8 bg-bg-primary relative overflow-hidden">
+        <ScrollReveal>
+          <InvitationSection />
+        </ScrollReveal>
+
+        <section className="py-4 bg-bg-primary relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.02]"
             style={{
               backgroundImage: "radial-gradient(circle, #0ea5e9 1px, transparent 1px)",
               backgroundSize: "28px 28px",
             }}
           />
-          <ParentSection
-            role="father"
-            title={PARENTS.father.title}
-            message={PARENTS.father.message}
-          />
-          <ParentSection
-            role="mother"
-            title={PARENTS.mother.title}
-            message={PARENTS.mother.message}
-          />
+          <ScrollReveal>
+            <ParentSection
+              role="father"
+              title={PARENTS.father.title}
+              message={PARENTS.father.message}
+            />
+          </ScrollReveal>
+          <ScrollReveal>
+            <ParentSection
+              role="mother"
+              title={PARENTS.mother.title}
+              message={PARENTS.mother.message}
+            />
+          </ScrollReveal>
         </section>
 
-        <LoveStoryCarousel />
+        <ScrollReveal>
+          <LoveStoryCarousel />
+        </ScrollReveal>
 
-        <CountdownTimer />
-        <CalendarSection />
-        <VenueSection />
-        <RSVPSection />
-        <PhotoGallery />
-        <Footer />
+        <ScrollReveal>
+          <CountdownTimer />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <CalendarSection />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <VenueSection />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <RSVPSection />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <PhotoGallery />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <Footer />
+        </ScrollReveal>
       </div>
     </main>
   );

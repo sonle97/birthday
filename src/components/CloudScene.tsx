@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * Animated sky scene:
  *  - Layered clouds drifting at different speeds/altitudes

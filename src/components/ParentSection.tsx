@@ -8,14 +8,14 @@ export default function ParentSection({ role, title, message }: ParentProps) {
   const isFather = role === "father";
 
   return (
-    <div className="py-10 px-4 max-w-4xl mx-auto">
+    <div className="py-6 px-4 max-w-4xl mx-auto">
       <div
         className={`flex flex-col items-center gap-8 ${
           isFather ? "md:flex-row" : "md:flex-row-reverse"
         }`}
       >
         {/* Photo */}
-        <div className="flex-shrink-0 relative group">
+        <div className={`flex-shrink-0 relative group ${isFather ? "reveal-fade-left" : "reveal-fade-right"}`}>
           {/* Glow */}
           <div
             className={`absolute inset-[-6px] rounded-3xl blur-lg ${
@@ -41,7 +41,7 @@ export default function ParentSection({ role, title, message }: ParentProps) {
               >
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
               </svg>
-              <p className={`font-body text-sm mt-2 ${isFather ? "text-sky-400" : "text-rose/60"}`}>
+              <p className={`font-body text-sm mt-2 ${isFather ? "text-sky-500" : "text-rose/70"}`}>
                 Ảnh {title}
               </p>
             </div>
@@ -60,8 +60,8 @@ export default function ParentSection({ role, title, message }: ParentProps) {
         </div>
 
         {/* Content */}
-        <div className={`text-center flex-1 ${isFather ? "md:text-left" : "md:text-right"}`}>
-          <p className="font-script text-2xl md:text-3xl text-sky-500 mb-3">
+        <div className={`text-center flex-1 ${isFather ? "md:text-left reveal-fade-right" : "md:text-right reveal-fade-left"} reveal-d2`}>
+          <p className={`font-script text-2xl md:text-3xl mb-3 ${isFather ? "text-sky-600" : "text-rose"}`}>
             Lời của {title}
           </p>
 
@@ -76,7 +76,7 @@ export default function ParentSection({ role, title, message }: ParentProps) {
           />
 
           <div className="glass-strong rounded-2xl p-6 shadow-3d">
-            <p className="font-body text-lg text-text-primary/80 leading-relaxed italic">
+            <p className="font-body text-lg text-text-primary leading-relaxed italic">
               &ldquo;{message}&rdquo;
             </p>
           </div>
