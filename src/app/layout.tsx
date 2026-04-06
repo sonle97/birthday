@@ -26,8 +26,23 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://birthday-baongoc.vercel.app"),
   title: META.title,
   description: META.description,
+  openGraph: {
+    title: META.title,
+    description: META.description,
+    type: "website",
+    locale: "vi_VN",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: META.title,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
