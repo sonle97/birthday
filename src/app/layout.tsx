@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Plus_Jakarta_Sans, Great_Vibes } from "next/font/google";
 import { META } from "@/lib/constants";
 import "./globals.css";
+import AOSProvider from "@/components/AOSProvider";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin", "latin-ext"],
@@ -36,7 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className={`${spaceGrotesk.variable} ${plusJakarta.variable} ${greatVibes.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen bg-bg-primary antialiased">{children}</body>
+      <body className="min-h-screen bg-bg-primary antialiased">
+        <AOSProvider />
+        {children}
+      </body>
     </html>
   );
 }

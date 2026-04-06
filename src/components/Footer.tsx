@@ -6,7 +6,7 @@ export default function Footer() {
       {/* ══════ Top wave separator ══════ */}
       <div className="relative h-20 md:h-28 bg-white">
         <svg
-          className="absolute bottom-0 left-0 right-0 w-full"
+          className="absolute bottom-0 left-0 right-0 w-full h-full"
           viewBox="0 0 1440 80"
           preserveAspectRatio="none"
           fill="none"
@@ -83,7 +83,7 @@ export default function Footer() {
 
         <div className="max-w-md mx-auto relative z-10">
           {/* ── Thank you ── */}
-          <div className="text-center mb-8 reveal-fade-up">
+          <div className="text-center mb-8" data-aos="fade-up">
             <div className="inline-block mb-4">
               <div
                 className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center shadow-lg"
@@ -108,7 +108,7 @@ export default function Footer() {
           </div>
 
           {/* ── Family signature card ── */}
-          <div className="mb-10 reveal-zoom reveal-d2">
+          <div className="mb-10" data-aos="zoom-in" data-aos-delay="200">
             <div className="relative mx-auto max-w-md rounded-[32px] p-[1.5px] save-date-border overflow-hidden">
               <div className="relative rounded-[31px] bg-white overflow-hidden">
                 <div className="shimmer-sweep" />
@@ -207,7 +207,7 @@ export default function Footer() {
           </div>
 
           {/* ── Credits ── */}
-          <div className="text-center reveal-fade-up reveal-d4">
+          <div className="text-center" data-aos="fade-up" data-aos-delay="400">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-sky-400/20" />
               <div className="w-1 h-1 rounded-full bg-sky-400/30" />

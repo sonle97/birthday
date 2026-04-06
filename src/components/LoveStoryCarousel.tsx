@@ -111,7 +111,7 @@ export default function LoveStoryCarousel() {
       <div className="absolute bottom-10 right-[-5%] w-48 h-48 bg-sky-200/20 rounded-full blur-3xl" />
 
       {/* Header */}
-      <div className="text-center mb-10 md:mb-14 max-w-lg mx-auto relative z-10 reveal-fade-down">
+      <div className="text-center mb-10 md:mb-14 max-w-lg mx-auto relative z-10" data-aos="fade-down">
         <div className="inline-flex items-center gap-2 mb-3">
           <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
           <svg
@@ -132,7 +132,7 @@ export default function LoveStoryCarousel() {
       </div>
 
       {/* Active slide info */}
-      <div className="text-center mb-6 relative z-10 reveal-zoom reveal-d2">
+      <div className="text-center mb-6 relative z-10" data-aos="zoom-in" data-aos-delay="200">
         <span
           className="inline-block px-3 py-1 rounded-full text-white font-heading text-[10px] font-bold uppercase tracking-widest mb-2"
           style={{ backgroundColor: activeItem.accent }}
@@ -148,7 +148,7 @@ export default function LoveStoryCarousel() {
       </div>
 
       {/* Swiper */}
-      <div className="relative z-10 reveal-fade-up reveal-d3">
+      <div className="relative z-10" data-aos="fade-up" data-aos-delay="300">
         <Swiper
           modules={[EffectCoverflow, Autoplay, Pagination]}
           effect="coverflow"

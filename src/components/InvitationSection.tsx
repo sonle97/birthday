@@ -17,7 +17,7 @@ export default function InvitationSection() {
       <div className="max-w-2xl mx-auto text-center relative z-10">
 
         {/* ── Heading ── */}
-        <div className="reveal-fade-down">
+        <div data-aos="fade-down">
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
             <svg className="w-4 h-4 text-sky-500" viewBox="0 0 20 20" fill="currentColor">
@@ -35,7 +35,7 @@ export default function InvitationSection() {
         </div>
 
         {/* ── Decorative divider ── */}
-        <div className="flex items-center justify-center gap-3 my-7 reveal-zoom reveal-d2">
+        <div className="flex items-center justify-center gap-3 my-7" data-aos="zoom-in" data-aos-delay="200">
           <div className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent to-sky-300/50" />
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-sky-400/40" />
@@ -48,14 +48,14 @@ export default function InvitationSection() {
         </div>
 
         {/* ── Message ── */}
-        <p className="font-body text-base md:text-lg text-text-primary/85 leading-relaxed max-w-md mx-auto reveal-blur reveal-d3">
+        <p className="font-body text-base md:text-lg text-text-primary/85 leading-relaxed max-w-md mx-auto" data-aos="fade-up" data-aos-delay="300">
           Cùng chung vui với gia đình chúng tôi
           <br />
           trong buổi tiệc mừng
         </p>
 
         {/* ── Name card — hero element ── */}
-        <div className="my-8 reveal-flip reveal-d4">
+        <div className="my-8" data-aos="flip-up" data-aos-delay="400">
           <div className="inline-block relative">
             {/* Animated gradient border */}
             <div className="relative rounded-[24px] p-[1.5px] save-date-border overflow-hidden">
@@ -106,7 +106,7 @@ export default function InvitationSection() {
         </div>
 
         {/* ── Event details summary ── */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8 reveal-fade-up reveal-d5">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8" data-aos="fade-up" data-aos-delay="500">
           <div className="flex items-center gap-2 text-sky-600/70">
             <svg className="w-4 h-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -126,7 +126,7 @@ export default function InvitationSection() {
         </div>
 
         {/* ── Closing line ── */}
-        <div className="reveal-fade-up reveal-d6">
+        <div data-aos="fade-up" data-aos-delay="600">
           <p className="font-body text-sm md:text-base text-text-primary/70 italic leading-relaxed max-w-sm mx-auto">
             Sự hiện diện của Quý khách là niềm vinh hạnh lớn lao cho gia đình chúng tôi
           </p>

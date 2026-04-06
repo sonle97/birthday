@@ -1,6 +1,7 @@
 import ParticlesBackground from "@/components/ParticlesBackground";
 import CloudScene from "@/components/CloudScene";
 import HeroSection from "@/components/HeroSection";
+import SectionDivider from "@/components/SectionDivider";
 import InvitationSection from "@/components/InvitationSection";
 import ParentSection from "@/components/ParentSection";
 import LoveStoryCarousel from "@/components/LoveStoryCarousel";
@@ -10,7 +11,6 @@ import VenueSection from "@/components/VenueSection";
 import RSVPSection from "@/components/RSVPSection";
 import PhotoGallery from "@/components/PhotoGallery";
 import Footer from "@/components/Footer";
-import ScrollReveal from "@/components/ScrollReveal";
 import { PARENTS } from "@/lib/constants";
 
 export default function Home() {
@@ -22,9 +22,11 @@ export default function Home() {
       <div className="relative z-10">
         <HeroSection />
 
-        <ScrollReveal>
-          <InvitationSection />
-        </ScrollReveal>
+        <SectionDivider variant="wave" fromColor="#ffffff" toColor="#ffffff" tintColor="rgba(186,230,253,0.2)" />
+
+        <InvitationSection />
+
+        <SectionDivider variant="curve" fromColor="#ffffff" toColor="#f0f9ff" />
 
         <section className="py-4 bg-bg-primary relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.02]"
@@ -33,49 +35,42 @@ export default function Home() {
               backgroundSize: "28px 28px",
             }}
           />
-          <ScrollReveal>
-            <ParentSection
-              role="father"
-              title={PARENTS.father.title}
-              message={PARENTS.father.message}
-            />
-          </ScrollReveal>
-          <ScrollReveal>
-            <ParentSection
-              role="mother"
-              title={PARENTS.mother.title}
-              message={PARENTS.mother.message}
-            />
-          </ScrollReveal>
+          <ParentSection
+            role="father"
+            title={PARENTS.father.title}
+            message={PARENTS.father.message}
+          />
+          <ParentSection
+            role="mother"
+            title={PARENTS.mother.title}
+            message={PARENTS.mother.message}
+          />
         </section>
 
-        <ScrollReveal>
-          <LoveStoryCarousel />
-        </ScrollReveal>
+        <SectionDivider variant="hills" fromColor="#f0f9ff" toColor="#f0f9ff" tintColor="rgba(186,230,253,0.18)" />
 
-        <ScrollReveal>
-          <CountdownTimer />
-        </ScrollReveal>
+        <LoveStoryCarousel />
 
-        <ScrollReveal>
-          <CalendarSection />
-        </ScrollReveal>
+        <SectionDivider variant="wave" fromColor="#f0f9ff" toColor="#f0f9ff" tintColor="rgba(186,230,253,0.15)" />
 
-        <ScrollReveal>
-          <VenueSection />
-        </ScrollReveal>
+        <CountdownTimer />
 
-        <ScrollReveal>
-          <RSVPSection />
-        </ScrollReveal>
+        <SectionDivider variant="curve" fromColor="#ffffff" toColor="#ffffff" tintColor="rgba(186,230,253,0.2)" />
 
-        <ScrollReveal>
-          <PhotoGallery />
-        </ScrollReveal>
+        <CalendarSection />
 
-        <ScrollReveal>
-          <Footer />
-        </ScrollReveal>
+        <SectionDivider variant="clouds" fromColor="#ffffff" toColor="#ffffff" tintColor="rgba(186,230,253,0.22)" />
+
+        <VenueSection />
+
+        <SectionDivider variant="wave" fromColor="#ffffff" toColor="#f0f9ff" tintColor="rgba(186,230,253,0.18)" />
+
+        <RSVPSection />
+
+        <SectionDivider variant="curve" fromColor="#f0f9ff" toColor="#ffffff" />
+
+        <PhotoGallery />
+        <Footer />
       </div>
     </main>
   );

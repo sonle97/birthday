@@ -29,7 +29,7 @@ export default function RSVPSection() {
       <div className="absolute bottom-10 right-[-5%] w-64 h-64 bg-sky-100/40 rounded-full blur-3xl" />
 
       <div className="max-w-lg mx-auto text-center relative z-10">
-        <div className="reveal-fade-down">
+        <div data-aos="fade-down">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
             <svg className="w-4 h-4 text-sky-600/70" viewBox="0 0 24 24" fill="currentColor">
@@ -49,7 +49,7 @@ export default function RSVPSection() {
         </div>
 
         {!submitted ? (
-          <div className="reveal-blur reveal-d2" style={{ perspective: 1000 }}>
+          <div data-aos="fade-up" data-aos-delay="200" style={{ perspective: 1000 }}>
             <form
               onSubmit={handleSubmit}
               className="glass-strong rounded-3xl shadow-3d-lg p-8 text-left"
@@ -151,7 +151,8 @@ export default function RSVPSection() {
           </div>
         ) : (
           <div
-            className="glass-strong rounded-3xl shadow-3d-lg p-8 reveal-zoom reveal-d2"
+            className="glass-strong rounded-3xl shadow-3d-lg p-8"
+            data-aos="zoom-in" data-aos-delay="200"
             style={{ perspective: 800 }}
           >
             <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-br from-sky-100 to-sky-200 flex items-center justify-center shadow-glow-sky">

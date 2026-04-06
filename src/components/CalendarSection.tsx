@@ -17,7 +17,7 @@ export default function CalendarSection() {
 
       <div className="max-w-md mx-auto text-center relative z-10">
         {/* Header */}
-        <div className="reveal-fade-down">
+        <div data-aos="fade-down">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
             <svg className="w-4 h-4 text-sky-600/70" viewBox="0 0 24 24" fill="currentColor">
@@ -34,7 +34,7 @@ export default function CalendarSection() {
         </div>
 
         {/* Calendar card */}
-        <div className="mt-10 reveal-rotate reveal-d2">
+        <div className="mt-10" data-aos="fade-up" data-aos-delay="200">
           <div className="relative rounded-[32px] p-[1.5px] save-date-border overflow-hidden">
             <div className="relative rounded-[31px] bg-white/95 overflow-hidden">
               <div className="shimmer-sweep" />
@@ -118,7 +118,7 @@ export default function CalendarSection() {
         </div>
 
         {/* Date display card */}
-        <div className="mt-10 reveal-zoom reveal-d4">
+        <div className="mt-10" data-aos="zoom-in" data-aos-delay="400">
           <div className="relative rounded-[24px] p-[1.5px] save-date-border overflow-hidden inline-block">
             <div className="relative rounded-[23px] bg-white/95 overflow-hidden">
               <div className="shimmer-sweep" />

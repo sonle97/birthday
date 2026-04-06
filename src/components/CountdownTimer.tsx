@@ -95,21 +95,21 @@ export default function CountdownTimer() {
           </svg>
           <div className="h-px w-8 bg-gradient-to-l from-transparent to-sky-300/50" />
         </div>
-        <p className="font-script text-3xl md:text-4xl text-sky-600 mb-1 reveal-fade-down">
+        <p className="font-script text-3xl md:text-4xl text-sky-600 mb-1" data-aos="fade-down">
           {isPast ? "Sự kiện đã diễn ra" : "Đếm ngược đến ngày vui"}
         </p>
-        <p className="font-heading text-[10px] font-bold text-sky-600/70 uppercase tracking-[0.4em] mb-8 reveal-fade-down reveal-d1">
+        <p className="font-heading text-[10px] font-bold text-sky-600/70 uppercase tracking-[0.4em] mb-8" data-aos="fade-down" data-aos-delay="100">
           {isPast ? "Event Completed" : "Countdown"}
         </p>
 
         {isPast ? (
-          <div className="glass-strong rounded-3xl px-8 py-6 shadow-3d reveal-flip reveal-d2">
+          <div className="glass-strong rounded-3xl px-8 py-6 shadow-3d" data-aos="flip-up" data-aos-delay="200">
             <p className="font-heading text-xl font-semibold text-text-primary">
               Cảm ơn tất cả Quý khách đã tham dự!
             </p>
           </div>
         ) : (
-          <div className="flex items-center justify-center gap-2 md:gap-4 reveal-flip reveal-d2">
+          <div className="flex items-center justify-center gap-2 md:gap-4" data-aos="flip-up" data-aos-delay="200">
             <TimeBlock value={timeLeft.days} label="Ngày" />
             <span className="font-heading text-2xl text-sky-300 mt-[-20px]">:</span>
             <TimeBlock value={timeLeft.hours} label="Giờ" />

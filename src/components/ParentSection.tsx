@@ -15,7 +15,7 @@ export default function ParentSection({ role, title, message }: ParentProps) {
         }`}
       >
         {/* Photo */}
-        <div className={`flex-shrink-0 relative group ${isFather ? "reveal-fade-left" : "reveal-fade-right"}`}>
+        <div className="flex-shrink-0 relative group" data-aos={isFather ? "fade-left" : "fade-right"}>
           {/* Glow */}
           <div
             className={`absolute inset-[-6px] rounded-3xl blur-lg ${
@@ -60,7 +60,7 @@ export default function ParentSection({ role, title, message }: ParentProps) {
         </div>
 
         {/* Content */}
-        <div className={`text-center flex-1 ${isFather ? "md:text-left reveal-fade-right" : "md:text-right reveal-fade-left"} reveal-d2`}>
+        <div className={`text-center flex-1 ${isFather ? "md:text-left" : "md:text-right"}`} data-aos={isFather ? "fade-right" : "fade-left"} data-aos-delay="200">
           <p className={`font-script text-2xl md:text-3xl mb-3 ${isFather ? "text-sky-600" : "text-rose"}`}>
             Lời của {title}
           </p>

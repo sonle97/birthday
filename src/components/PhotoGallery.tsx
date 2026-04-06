@@ -50,7 +50,7 @@ export default function PhotoGallery() {
 
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-12 reveal-fade-down">
+        <div className="text-center mb-12" data-aos="fade-down">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
             <svg className="w-4 h-4 text-sky-600/70" viewBox="0 0 24 24" fill="currentColor">
@@ -71,7 +71,9 @@ export default function PhotoGallery() {
           {GALLERY_ITEMS.map((item) => (
             <div
               key={item.id}
-              className={`${item.span} group reveal-zoom reveal-d${item.id}`}
+              className={`${item.span} group`}
+              data-aos="zoom-in"
+              data-aos-delay={String(item.id * 100)}
             >
               <div
                 className={`relative ${item.aspect} w-full rounded-[20px] md:rounded-[24px] overflow-hidden cursor-pointer`}
@@ -121,7 +123,7 @@ export default function PhotoGallery() {
         </div>
 
         {/* Bottom caption */}
-        <p className="text-center mt-8 font-body text-sm text-sky-600/70 italic reveal-fade-up reveal-d8">
+        <p className="text-center mt-8 font-body text-sm text-sky-600/70 italic" data-aos="fade-up" data-aos-delay="800">
           Thêm ảnh vào thư mục public/images để hiển thị
         </p>
       </div>

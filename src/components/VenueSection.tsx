@@ -15,7 +15,7 @@ export default function VenueSection() {
 
       <div className="max-w-lg mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-10 reveal-fade-down">
+        <div className="text-center mb-10" data-aos="fade-down">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
             <svg
@@ -36,7 +36,7 @@ export default function VenueSection() {
         </div>
 
         {/* Main card */}
-        <div className="reveal-flip reveal-d2">
+        <div data-aos="flip-up" data-aos-delay="200">
           <div className="relative rounded-[32px] p-[1.5px] save-date-border overflow-hidden">
             <div className="relative rounded-[31px] bg-white/95 overflow-hidden">
               {/* Shimmer */}
