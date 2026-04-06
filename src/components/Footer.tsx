@@ -216,9 +216,7 @@ export default function Footer() {
             <p className="font-body text-sky-700/60 text-xs">
               Designed with{" "}
               <span className="text-rose inline-block">&#10084;</span> by{" "}
-              <span className="font-semibold text-sky-600/70">
-                Thiệp Online
-              </span>
+              <span className="font-semibold text-sky-600/70">Quang Sơn</span>
             </p>
             <p className="font-body text-sky-600/50 text-[10px] mt-1">
               &copy; {EVENT.year} — Thiệp mời thôi nôi bé {BABY.name}
