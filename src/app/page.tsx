@@ -11,6 +11,7 @@ import VenueSection from "@/components/VenueSection";
 import RSVPSection from "@/components/RSVPSection";
 import PhotoGallery from "@/components/PhotoGallery";
 import Footer from "@/components/Footer";
+import MusicPlayer from "@/components/MusicPlayer";
 import { PARENTS } from "@/lib/constants";
 
 export default function Home() {
@@ -72,6 +73,8 @@ export default function Home() {
         <PhotoGallery />
         <Footer />
       </div>
+
+      <MusicPlayer />
     </main>
   );
 }

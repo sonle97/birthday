@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BABY, EVENT } from "@/lib/constants";
 
 /* ---------- static decorative data ---------- */
@@ -122,15 +123,17 @@ export default function HeroSection() {
               className="relative w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden shadow-glow-white group cursor-pointer gpu-layer transition-transform duration-300 hover:scale-105"
               style={{ border: "3px solid rgba(255,255,255,0.7)" }}
             >
-              <div className="w-full h-full bg-gradient-to-br from-white via-sky-50 to-sky-100 flex items-center justify-center relative overflow-hidden">
+              <div className="w-full h-full relative overflow-hidden">
+                <Image
+                  src="/images/anh_be.png"
+                  alt={BABY.name}
+                  fill
+                  sizes="(min-width: 768px) 208px, 160px"
+                  className="object-cover"
+                  priority
+                />
                 {/* CSS shimmer */}
-                <div className="shimmer-sweep" />
-                <div className="text-center relative z-10">
-                  <svg className="w-14 h-14 md:w-18 md:h-18 mx-auto text-sky-300/70" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                  </svg>
-                  <p className="text-sky-400/80 font-body text-[10px] mt-1 tracking-wider uppercase">Ảnh bé yêu</p>
-                </div>
+                <div className="shimmer-sweep pointer-events-none" />
               </div>
             </div>
 
