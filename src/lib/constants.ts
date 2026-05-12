@@ -31,9 +31,8 @@ export const EVENT = {
 export const VENUE = {
   name: "Nhà Hàng Thiên Phát",
   address:
-    "51/4A Đường Nguyễn Thị Khắp, Khu phố Chiêu Liêu, Phường Tân Đông Hiệp, Thành phố Dĩ An, Bình Dương",
-  mapUrl:
-    "https://www.google.com/maps/place/TCSK+Nh%C3%A0+h%C3%A0ng+THI%C3%8AN+PH%C3%81T/@10.9228578,106.7534182,146m/data=!3m1!1e3!4m6!3m5!1s0x3174d9d1e64c0689:0xc5566560d0032363!8m2!3d10.9230044!4d106.7534404!16s%2Fg%2F11g9nfc513?entry=ttu&g_ep=EgoyMDI2MDUwNi4wIKXMDSoASAFQAw%3D%3D",
+    "38A Đường Nguyễn Thị Khắp, Khu phố Chiêu Liêu, Phường Tân Đông Hiệp, Thành phố Dĩ An, Bình Dương",
+  mapUrl: "https://maps.app.goo.gl/2VMg42tMXwdPDS768",
 } as const;
 
 export const PARENTS = {

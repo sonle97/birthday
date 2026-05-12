@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:vietbach.thieponline.org)"
+      "WebFetch(domain:vietbach.thieponline.org)",
+      "Bash(node -e \"const fs=require\\('fs'\\);const buf=fs.readFileSync\\('public/images/anh_be.png'\\);console.log\\('Size:',\\(buf.length/1024\\).toFixed\\(1\\),'KB'\\);if\\(buf[0]===0x89&&buf[1]===0x50\\){const w=buf.readUInt32BE\\(16\\);const h=buf.readUInt32BE\\(20\\);console.log\\('Dimensions:',w,'x',h\\);console.log\\('Ratio:',\\(w/h\\).toFixed\\(2\\)\\);}\")",
+      "Bash(npx --no-install tsc --noEmit)"
     ]
   }
 }

@@ -10,10 +10,10 @@ const img2 = "/images/henho.jpg";
 const img3 = "/images/damhoi.jpg";
 const img4 = "/images/damcuoi.jpg";
 const img5 = "/images/mangthai.jpg";
-const img6 = "/images/chaodoi.jpg";
-const img7 = "/images/embe.jpg";
-const img8 = "/images/daudoi.png";
-const img9 = "/images/thoinoi.png";
+const img6 = "/images/moments/chan-dung-be.png";
+const img7 = "/images/moments/daudoi.png";
+const img8 = "/images/moments/anh_be.png";
+const img9 = "/images/moments/thoinoi.png";
 
 /* Single bundle CSS — most reliable across all bundlers + mobile Safari */
 import "swiper/swiper-bundle.css";
@@ -184,7 +184,7 @@ export default function LoveStoryCarousel() {
 
                 <div className="relative m-[1.5px] rounded-[23px] bg-white overflow-hidden">
                   {/* Image area as background */}
-                  <div className="relative h-[200px] md:h-[240px] overflow-hidden">
+                  <div className="relative h-[250px] md:h-[290px] overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.title}

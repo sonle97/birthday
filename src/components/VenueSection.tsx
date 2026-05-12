@@ -136,7 +136,7 @@ export default function VenueSection() {
                         Phòng tiệc
                       </p>
                       <p className="font-body text-sm md:text-base text-text-primary font-medium">
-                        Tiệc tư gia tại nhà hàng
+                        Tiệc tư gia tại nhà hàng Thiên Phát
                       </p>
                     </div>
                   </div>

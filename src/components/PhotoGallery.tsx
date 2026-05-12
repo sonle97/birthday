@@ -2,101 +2,139 @@
 
 import { useState } from "react";
 
-const GALLERY_ITEMS = [
+type Tape = "sky" | "rose" | "cyan" | "amber";
+
+const GALLERY_ITEMS: {
+  id: number;
+  label: string;
+  src: string;
+  rotate: number;
+  offsetY: number;
+  tape: Tape;
+  tapeAngle: number;
+}[] = [
   {
     id: 1,
-    label: "Nụ cười đầu tiên",
-    icon: "smile",
-    src: "/images/moments/moment-1.jpg",
-    span: "col-span-2 row-span-2",
-    aspect: "aspect-square",
-    gradient: "from-sky-200/60 via-sky-100/40 to-white",
+    label: "Công chúa nhỏ",
+    src: "/images/moments/bao-ngoc-1tuoi.png",
+    rotate: -3,
+    offsetY: 0,
+    tape: "rose",
+    tapeAngle: -6,
   },
   {
     id: 2,
-    label: "Bước chân nhỏ",
-    icon: "foot",
-    src: "/images/moments/moment-2.jpg",
-    span: "",
-    aspect: "aspect-[3/4]",
-    gradient: "from-sky-100/50 via-cyan-50 to-white",
+    label: "Phá bánh sinh nhật",
+    src: "/images/moments/smash-cake.png",
+    rotate: 2,
+    offsetY: 36,
+    tape: "sky",
+    tapeAngle: 8,
   },
   {
     id: 3,
-    label: "Đôi mắt trong veo",
-    icon: "eye",
-    src: "/images/moments/moment-3.jpg",
-    span: "",
-    aspect: "aspect-square",
-    gradient: "from-cyan-100/40 via-sky-50 to-white",
+    label: "Happy Thôi nôi",
+    src: "/images/moments/happy-thoinoi.png",
+    rotate: -2,
+    offsetY: 14,
+    tape: "amber",
+    tapeAngle: -4,
   },
   {
     id: 4,
-    label: "Giấc ngủ bình yên",
-    icon: "moon",
-    src: "/images/moments/moment-4.jpg",
-    span: "",
-    aspect: "aspect-square",
-    gradient: "from-sky-100/40 via-sky-50 to-white",
+    label: "Chân dung em bé",
+    src: "/images/moments/chan-dung-be.png",
+    rotate: 4,
+    offsetY: 44,
+    tape: "cyan",
+    tapeAngle: 6,
   },
   {
     id: 5,
-    label: "Khoảnh khắc vui",
-    icon: "star",
-    src: "/images/moments/moment-5.jpg",
-    span: "col-span-2",
-    aspect: "aspect-[2/1]",
-    gradient: "from-sky-100/50 via-cyan-50/40 to-white",
+    label: "Dạo chơi vườn hoa",
+    src: "/images/moments/vuon-hoa.png",
+    rotate: -4,
+    offsetY: 8,
+    tape: "rose",
+    tapeAngle: 10,
   },
   {
     id: 6,
-    label: "Tình yêu gia đình",
-    icon: "heart",
-    src: "/images/moments/moment-6.jpg",
-    span: "",
-    aspect: "aspect-[3/4]",
-    gradient: "from-rose-light/30 via-pink-50 to-white",
+    label: "Bé yêu đọc sách",
+    src: "/images/moments/doc-sach.png",
+    rotate: 3,
+    offsetY: 28,
+    tape: "sky",
+    tapeAngle: -8,
+  },
+  {
+    id: 7,
+    label: "Bữa tiệc bóng hồng",
+    src: "/images/moments/balloon-hong.png",
+    rotate: -1,
+    offsetY: 16,
+    tape: "amber",
+    tapeAngle: 4,
+  },
+  {
+    id: 8,
+    label: "Bảo Ngọc tròn 1",
+    src: "/images/moments/anh_be.png",
+    rotate: 3,
+    offsetY: 40,
+    tape: "cyan",
+    tapeAngle: -6,
+  },
+  {
+    id: 9,
+    label: "Những ngày đầu đời",
+    src: "/images/moments/daudoi.png",
+    rotate: -3,
+    offsetY: 4,
+    tape: "rose",
+    tapeAngle: 7,
+  },
+  {
+    id: 10,
+    label: "Thôi nôi đáng nhớ",
+    src: "/images/moments/thoinoi.png",
+    rotate: 2,
+    offsetY: 24,
+    tape: "sky",
+    tapeAngle: -10,
+  },
+  {
+    id: 11,
+    label: "Dạo vườn hồng",
+    src: "/images/moments/vuon-hong.png",
+    rotate: -3,
+    offsetY: 18,
+    tape: "amber",
+    tapeAngle: 5,
+  },
+  {
+    id: 12,
+    label: "Cùng bồ câu trắng",
+    src: "/images/moments/bo-cau.png",
+    rotate: 3,
+    offsetY: 6,
+    tape: "rose",
+    tapeAngle: -7,
   },
 ];
 
-const icons: Record<string, React.ReactNode> = {
-  smile: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
-    </svg>
-  ),
-  foot: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M12 2C9.24 2 7 4.24 7 7c0 2.85 2.92 7.21 5 9.88 2.11-2.69 5-7 5-9.88 0-2.76-2.24-5-5-5zm0 7.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 4.5 12 4.5s2.5 1.12 2.5 2.5S13.38 9.5 12 9.5zM5 20h14v2H5z" />
-    </svg>
-  ),
-  eye: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
-    </svg>
-  ),
-  moon: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M12.01 12c0-3.57 2.2-6.62 5.31-7.87.89-.36.75-1.69-.19-1.9-1.1-.24-2.27-.18-3.37.21C10.39 3.83 8 7.26 8 11.22c0 4.97 4.02 9 8.99 9 1.61 0 3.11-.46 4.4-1.24.78-.46.68-1.65-.22-1.87C17.14 16.6 12.01 14.78 12.01 12z" />
-    </svg>
-  ),
-  star: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-    </svg>
-  ),
-  heart: (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-    </svg>
-  ),
+const TAPE_COLORS: Record<Tape, string> = {
+  sky: "bg-sky-200/75",
+  rose: "bg-rose-200/75",
+  cyan: "bg-cyan-200/75",
+  amber: "bg-amber-200/75",
 };
 
 export default function PhotoGallery() {
   const [failed, setFailed] = useState<Record<number, boolean>>({});
 
   return (
-    <section className="relative py-14 md:py-20 px-4 overflow-hidden bg-gradient-to-b from-white via-sky-50/20 to-white">
+    <section className="relative py-14 md:py-24 px-4 overflow-hidden bg-gradient-to-b from-white via-sky-50/20 to-white">
       {/* BG decoration */}
       <div className="absolute top-20 left-[-5%] w-72 h-72 bg-sky-100/30 rounded-full blur-3xl" />
       <div className="absolute bottom-16 right-[-5%] w-56 h-56 bg-sky-200/20 rounded-full blur-3xl" />
@@ -107,9 +145,20 @@ export default function PhotoGallery() {
         }}
       />
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      {/* Subtle paper-grid backdrop for scrapbook feel */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(#0ea5e9 1px, transparent 1px), radial-gradient(#0ea5e9 1px, transparent 1px)",
+          backgroundSize: "32px 32px, 32px 32px",
+          backgroundPosition: "0 0, 16px 16px",
+        }}
+      />
+
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-12" data-aos="fade-down">
+        <div className="text-center mb-14 md:mb-20" data-aos="fade-down">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/50" />
             <svg
@@ -127,78 +176,119 @@ export default function PhotoGallery() {
           <p className="font-heading text-[10px] font-bold text-sky-600/70 uppercase tracking-[0.4em]">
             Photo Album
           </p>
+          <p className="font-body text-xs md:text-sm text-sky-600/70 mt-3 max-w-md mx-auto italic">
+            Bộ sưu tập của Bảo Ngọc — như ghim trên trang giấy ký ức
+          </p>
         </div>
 
-        {/* Masonry grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-auto">
-          {GALLERY_ITEMS.map((item) => {
+        {/* Polaroid scatter — không thẳng hàng cố ý */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 md:gap-x-8 lg:gap-x-10 gap-y-4 md:gap-y-6 pb-12 md:pb-20">
+          {GALLERY_ITEMS.map((item, idx) => {
             const showImage = !failed[item.id];
             return (
               <div
                 key={item.id}
-                className={`${item.span} group`}
-                data-aos="zoom-in"
-                data-aos-delay={String(item.id * 100)}
+                className="group flex justify-center items-start"
+                style={{ marginTop: `${item.offsetY}px` }}
+                data-aos="fade-up"
+                data-aos-delay={String(idx * 80)}
               >
                 <div
-                  className={`relative ${item.aspect} w-full rounded-[20px] md:rounded-[24px] overflow-hidden cursor-pointer`}
-                  style={{
-                    boxShadow:
-                      "0 2px 8px rgba(14,165,233,0.08), 0 8px 24px rgba(14,165,233,0.06)",
-                  }}
+                  className="relative cursor-pointer transition-transform duration-500 ease-out group-hover:!rotate-0 group-hover:scale-[1.06] group-hover:z-20"
+                  style={{ transform: `rotate(${item.rotate}deg)` }}
                 >
-                  {showImage ? (
-                    <img
-                      src={item.src}
-                      alt={item.label}
-                      onError={() =>
-                        setFailed((f) => ({ ...f, [item.id]: true }))
-                      }
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  {/* Polaroid paper frame */}
+                  <div className="relative bg-white p-2 pb-9 md:p-2.5 md:pb-12 rounded-[4px] shadow-[0_3px_10px_rgba(0,0,0,0.07),0_15px_35px_rgba(14,165,233,0.10)] group-hover:shadow-[0_8px_22px_rgba(0,0,0,0.12),0_30px_60px_rgba(14,165,233,0.22)] transition-shadow duration-500">
+                    {/* Washi tape accent */}
+                    <div
+                      className={`absolute -top-2 left-1/2 w-14 md:w-16 h-4 md:h-5 ${TAPE_COLORS[item.tape]} opacity-85 pointer-events-none`}
+                      style={{
+                        transform: `translateX(-50%) rotate(${item.tapeAngle}deg)`,
+                        boxShadow: "0 1px 2px rgba(0,0,0,0.06)",
+                        clipPath:
+                          "polygon(3% 18%, 97% 6%, 99% 82%, 1% 94%)",
+                      }}
                     />
-                  ) : (
-                    <>
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${item.gradient}`}
-                      />
-                      <div
-                        className="absolute inset-0 opacity-[0.04]"
-                        style={{
-                          backgroundImage:
-                            "radial-gradient(circle at 25% 35%, rgba(14,165,233,0.4) 0%, transparent 50%), radial-gradient(circle at 75% 65%, rgba(56,189,248,0.3) 0%, transparent 50%)",
-                        }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center p-4">
-                        <div
-                          className={`w-10 h-10 md:w-14 md:h-14 ${item.icon === "heart" ? "text-rose/50" : "text-sky-300/50"}`}
-                        >
-                          {icons[item.icon]}
+                    {/* Tape stripe pattern */}
+                    <div
+                      className="absolute -top-2 left-1/2 w-14 md:w-16 h-4 md:h-5 opacity-30 pointer-events-none mix-blend-multiply"
+                      style={{
+                        transform: `translateX(-50%) rotate(${item.tapeAngle}deg)`,
+                        backgroundImage:
+                          "repeating-linear-gradient(45deg, rgba(255,255,255,0.6) 0 2px, transparent 2px 6px)",
+                        clipPath:
+                          "polygon(3% 18%, 97% 6%, 99% 82%, 1% 94%)",
+                      }}
+                    />
+
+                    {/* Photo */}
+                    <div className="relative overflow-hidden bg-gradient-to-br from-sky-50 to-white">
+                      {showImage ? (
+                        <img
+                          src={item.src}
+                          alt={item.label}
+                          loading="lazy"
+                          onError={() =>
+                            setFailed((f) => ({ ...f, [item.id]: true }))
+                          }
+                          className="block w-full aspect-[3/4] object-cover"
+                        />
+                      ) : (
+                        <div className="aspect-[3/4] w-full bg-gradient-to-br from-sky-100/50 to-white flex items-center justify-center">
+                          <svg
+                            className="w-10 h-10 text-sky-300/50"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                          </svg>
                         </div>
-                      </div>
-                    </>
-                  )}
-
-                  {/* Label overlay */}
-                  <div
-                    className={`absolute inset-x-0 bottom-0 p-3 md:p-4 bg-gradient-to-t from-black/60 via-black/20 to-transparent ${showImage ? "opacity-0 group-hover:opacity-100" : "opacity-100"} transition-opacity duration-300`}
-                  >
-                    <div className="inline-flex px-3 py-1 rounded-full bg-white/80 backdrop-blur-sm border border-white/50">
-                      <p className="font-body text-[10px] md:text-xs text-sky-600 font-medium tracking-wide">
-                        {item.label}
-                      </p>
+                      )}
+                      {/* Subtle inner shadow for photo depth */}
+                      <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_22px_rgba(0,0,0,0.08)]" />
                     </div>
-                  </div>
 
-                  {/* Corner number badge */}
-                  <div className="absolute top-3 right-3 w-6 h-6 md:w-7 md:h-7 rounded-full bg-white/60 backdrop-blur-sm border border-white/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-100 scale-75">
-                    <span className="font-heading text-[10px] font-bold text-sky-500">
-                      {item.id}
+                    {/* Handwritten caption */}
+                    <p className="absolute bottom-1.5 md:bottom-3 left-0 right-0 text-center font-script text-sm md:text-lg text-sky-700/80 leading-none px-2 truncate">
+                      {item.label}
+                    </p>
+
+                    {/* Small index in corner */}
+                    <span className="absolute top-1 left-2 font-heading text-[8px] md:text-[9px] tracking-wider text-sky-400/50 select-none">
+                      №{String(item.id).padStart(2, "0")}
                     </span>
                   </div>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        {/* Footer accent */}
+        <div
+          className="flex items-center justify-center gap-2 mt-4"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div className="h-px w-10 bg-gradient-to-r from-transparent to-sky-300/40" />
+          <svg
+            className="w-3 h-3 text-rose/60"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+          <p className="font-body text-[10px] md:text-xs text-sky-600/60 uppercase tracking-[0.3em]">
+            {GALLERY_ITEMS.length} Khoảnh khắc
+          </p>
+          <svg
+            className="w-3 h-3 text-rose/60"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+          <div className="h-px w-10 bg-gradient-to-l from-transparent to-sky-300/40" />
         </div>
       </div>
     </section>
