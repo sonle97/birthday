@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Plus_Jakarta_Sans, Great_Vibes } from "next/font/google";
+import {
+  Space_Grotesk,
+  Plus_Jakarta_Sans,
+  Great_Vibes,
+} from "next/font/google";
 import { META } from "@/lib/constants";
 import "./globals.css";
 import AOSProvider from "@/components/AOSProvider";
@@ -36,7 +40,7 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/anh_be.png",
         width: 1200,
         height: 630,
         alt: META.title,
@@ -51,7 +55,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={`${spaceGrotesk.variable} ${plusJakarta.variable} ${greatVibes.variable}`} suppressHydrationWarning>
+    <html
+      lang="vi"
+      className={`${spaceGrotesk.variable} ${plusJakarta.variable} ${greatVibes.variable}`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen bg-bg-primary antialiased">
         <AOSProvider />
         {children}
