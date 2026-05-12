@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     images: [
       {
-        url: "/images/anh_be.png",
+        url: "/anh_be.png",
         width: 1086,
         height: 1448,
         alt: META.title,
