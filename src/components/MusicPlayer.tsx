@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 const TRACK_SRC = "/music.mp3";
 
@@ -23,36 +23,6 @@ export default function MusicPlayer() {
     audioRef.current?.pause();
     setIsPlaying(false);
   }, []);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const tryAutoplay = async () => {
-      const audio = audioRef.current;
-      if (!audio) return;
-      try {
-        await audio.play();
-        if (!cancelled) {
-          setIsPlaying(true);
-        }
-      } catch {
-        // Browser blocked autoplay — wait for first user interaction
-        const handleInteraction = () => {
-          startMusic();
-        };
-        window.addEventListener("click", handleInteraction, { once: true });
-        window.addEventListener("touchstart", handleInteraction, { once: true });
-        window.addEventListener("keydown", handleInteraction, { once: true });
-        window.addEventListener("scroll", handleInteraction, { once: true, passive: true });
-      }
-    };
-
-    tryAutoplay();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [startMusic]);
 
   const toggle = () => {
     if (isPlaying) stopMusic();
