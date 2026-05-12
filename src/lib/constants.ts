@@ -11,11 +11,11 @@ export const BABY = {
 
 export const EVENT = {
   /** Full ISO date string in Vietnam timezone */
-  dateISO: "2026-05-13T00:00:00+07:00",
+  dateISO: "2026-05-16T00:00:00+07:00",
   /** Display parts */
-  day: 13,
-  dayOfWeek: "Thứ Tư",
-  dayOfWeekShort: "T4",
+  day: 16,
+  dayOfWeek: "Thứ Bảy",
+  dayOfWeekShort: "T7",
   month: 5,
   monthName: "Tháng 5",
   monthNameEn: "May",
@@ -29,25 +29,23 @@ export const EVENT = {
 } as const;
 
 export const VENUE = {
-  name: "Nhà Hàng Tiệc Cưới ASEAN",
-  floor: "Tầng 2",
-  room: "Phòng Diamond",
-  /** Full display: "Tầng 2 — Phòng Diamond" */
-  get floorRoom() {
-    return `${this.floor} — ${this.room}`;
-  },
-  address: "Số 2 Lê Đại Hành, Hai Bà Trưng, TP Hồ Chí Minh",
-  mapUrl: "https://maps.google.com/?q=2+Le+Dai+Hanh,+Hai+Ba+Trung,+Thanh+pho+Ho+Chi+Minh",
+  name: "Nhà Hàng Thiên Phát",
+  address:
+    "51/4A Đường Nguyễn Thị Khắp, Khu phố Chiêu Liêu, Phường Tân Đông Hiệp, Thành phố Dĩ An, Bình Dương",
+  mapUrl:
+    "https://www.google.com/maps/place/TCSK+Nh%C3%A0+h%C3%A0ng+THI%C3%8AN+PH%C3%81T/@10.9228578,106.7534182,146m/data=!3m1!1e3!4m6!3m5!1s0x3174d9d1e64c0689:0xc5566560d0032363!8m2!3d10.9230044!4d106.7534404!16s%2Fg%2F11g9nfc513?entry=ttu&g_ep=EgoyMDI2MDUwNi4wIKXMDSoASAFQAw%3D%3D",
 } as const;
 
 export const PARENTS = {
   father: {
-    title: "Bố",
+    title: "Ba",
+    image: "/images/anh_bo.jpg",
     message:
-      "Bố rất hạnh phúc khi được đón con yêu đến với thế giới này. Mỗi ngày nhìn con lớn lên là niềm vui lớn nhất của bố.",
+      "Ba rất hạnh phúc khi được đón con yêu đến với thế giới này. Mỗi ngày nhìn con lớn lên là niềm vui lớn nhất của ba.",
   },
   mother: {
     title: "Mẹ",
+    image: "/images/anh_me.jpg",
     message:
       "Mẹ yêu con biết bao! Từng ngày con lớn lên, mẹ cảm nhận được tình yêu vô bờ bến. Con là món quà quý giá nhất mà cuộc đời ban tặng cho mẹ.",
   },

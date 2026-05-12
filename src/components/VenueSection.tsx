@@ -136,7 +136,7 @@ export default function VenueSection() {
                         Phòng tiệc
                       </p>
                       <p className="font-body text-sm md:text-base text-text-primary font-medium">
-                        {VENUE.floor} — {VENUE.room}
+                        Tiệc tư gia tại nhà hàng
                       </p>
                     </div>
                   </div>

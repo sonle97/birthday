@@ -15,7 +15,10 @@ export default function ParentSection({ role, title, message }: ParentProps) {
         }`}
       >
         {/* Photo */}
-        <div className="flex-shrink-0 relative group" data-aos={isFather ? "fade-left" : "fade-right"}>
+        <div
+          className="flex-shrink-0 relative group"
+          data-aos={isFather ? "fade-left" : "fade-right"}
+        >
           {/* Glow */}
           <div
             className={`absolute inset-[-6px] rounded-3xl blur-lg ${
@@ -34,15 +37,14 @@ export default function ParentSection({ role, title, message }: ParentProps) {
                   : "bg-gradient-to-br from-rose-light/30 via-pink-50 to-rose-light/20"
               }`}
             >
-              <svg
-                className={`w-16 h-16 ${isFather ? "text-sky-300" : "text-rose/40"}`}
-                viewBox="0 0 24 24"
-                fill="currentColor"
+              <p
+                className={`font-body text-sm mt-2 ${isFather ? "text-sky-500" : "text-rose/70"}`}
               >
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-              </svg>
-              <p className={`font-body text-sm mt-2 ${isFather ? "text-sky-500" : "text-rose/70"}`}>
-                Ảnh {title}
+                <img
+                  src={isFather ? "/images/anh_bo.jpg" : "/images/anh_me.jpg"}
+                  alt={title}
+                  className="w-30 h-30 rounded-full object-cover border-2 border-white shadow-md"
+                />
               </p>
             </div>
           </div>
@@ -60,8 +62,14 @@ export default function ParentSection({ role, title, message }: ParentProps) {
         </div>
 
         {/* Content */}
-        <div className={`text-center flex-1 ${isFather ? "md:text-left" : "md:text-right"}`} data-aos={isFather ? "fade-right" : "fade-left"} data-aos-delay="200">
-          <p className={`font-script text-2xl md:text-3xl mb-3 ${isFather ? "text-sky-600" : "text-rose"}`}>
+        <div
+          className={`text-center flex-1 ${isFather ? "md:text-left" : "md:text-right"}`}
+          data-aos={isFather ? "fade-right" : "fade-left"}
+          data-aos-delay="200"
+        >
+          <p
+            className={`font-script text-2xl md:text-3xl mb-3 ${isFather ? "text-sky-600" : "text-rose"}`}
+          >
             Lời của {title}
           </p>
 
