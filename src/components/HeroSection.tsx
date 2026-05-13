@@ -98,7 +98,7 @@ export default function HeroSection() {
                 className="w-1.5 h-1.5 rounded-full bg-sky-400"
                 style={{ animation: "sparkle 2s ease-in-out infinite" }}
               />
-              <span className="font-heading text-[11px] font-semibold text-sky-700 tracking-[0.25em] uppercase">
+              <span className="font-heading text-[15px] font-[700] text-sky-700 tracking-[0.25em] uppercase">
                 Thiệp mời thôi nôi
               </span>
               <span
@@ -337,8 +337,31 @@ export default function HeroSection() {
                   </div>
                 </div>
 
+                {/* Time strip */}
+                <div className="relative mt-5 flex items-center justify-center gap-2.5">
+                  <svg
+                    className="w-3.5 h-3.5 text-sky-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <p className="font-heading text-[11px] font-bold text-sky-600 uppercase tracking-[0.3em]">
+                    {EVENT.timeLabel}
+                  </p>
+                  <span className="font-heading text-base font-extrabold text-text-primary tracking-wide">
+                    {EVENT.time}
+                  </span>
+                </div>
+
                 {/* Bottom accent line */}
-                <div className="mt-5 flex items-center justify-center gap-2">
+                <div className="mt-4 flex items-center justify-center gap-2">
                   <div className="h-px w-8 bg-gradient-to-r from-transparent to-sky-300/30" />
                   <div className="w-1.5 h-1.5 rounded-full bg-sky-400/40" />
                   <div className="w-1 h-1 rounded-full bg-gold/40" />

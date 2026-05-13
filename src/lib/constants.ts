@@ -11,7 +11,7 @@ export const BABY = {
 
 export const EVENT = {
   /** Full ISO date string in Vietnam timezone */
-  dateISO: "2026-05-16T00:00:00+07:00",
+  dateISO: "2026-05-16T17:30:00+07:00",
   /** Display parts */
   day: 16,
   dayOfWeek: "Thứ Bảy",
@@ -21,6 +21,9 @@ export const EVENT = {
   monthNameEn: "May",
   year: 2026,
   yearShort: "26",
+  /** Event start time (24h) */
+  time: "17:30",
+  timeLabel: "Đón khách",
   /** Calendar rendering: 0=Sun … 6=Sat. May 2026 starts on Friday. */
   calendarStartDay: 5,
   calendarTotalDays: 31,

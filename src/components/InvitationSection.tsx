@@ -109,10 +109,19 @@ export default function InvitationSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8" data-aos="fade-up" data-aos-delay="500">
           <div className="flex items-center gap-2 text-sky-600/70">
             <svg className="w-4 h-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             <span className="font-body text-sm font-medium">
               {EVENT.dayOfWeek}, {EVENT.day}/{EVENT.month}/{EVENT.year}
+            </span>
+          </div>
+          <div className="hidden sm:block w-1 h-1 rounded-full bg-sky-300/50" />
+          <div className="flex items-center gap-2 text-sky-600/70">
+            <svg className="w-4 h-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className="font-body text-sm font-medium">
+              {EVENT.timeLabel} lúc {EVENT.time}
             </span>
           </div>
           <div className="hidden sm:block w-1 h-1 rounded-full bg-sky-300/50" />

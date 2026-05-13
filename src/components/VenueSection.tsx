@@ -1,4 +1,4 @@
-import { VENUE } from "@/lib/constants";
+import { EVENT, VENUE } from "@/lib/constants";
 
 export default function VenueSection() {
   return (
@@ -115,6 +115,37 @@ export default function VenueSection() {
 
                 {/* Info rows */}
                 <div className="space-y-2.5 mb-7">
+                  <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-sky-50/60 border border-sky-100/50 group">
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-sky-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <svg
+                        className="w-4.5 h-4.5 text-white"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div className="text-left">
+                      <p className="font-heading text-[10px] text-sky-400 uppercase tracking-wider font-semibold">
+                        Thời gian
+                      </p>
+                      <p className="font-body text-sm md:text-base text-text-primary font-medium">
+                        {EVENT.timeLabel} lúc{" "}
+                        <span className="font-heading font-extrabold text-sky-600">
+                          {EVENT.time}
+                        </span>{" "}
+                        · {EVENT.dayOfWeek}, {EVENT.day}/{EVENT.month}/
+                        {EVENT.year}
+                      </p>
+                    </div>
+                  </div>
+
                   <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-sky-50/60 border border-sky-100/50 group">
                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-sky-500 flex items-center justify-center flex-shrink-0 shadow-sm">
                       <svg
